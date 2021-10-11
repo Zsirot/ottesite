@@ -46,14 +46,6 @@ body {
   min-height: 100vh;
   display: flex;
 }
-.john {
-  position: absolute;
-  background: url(images/john-otte-2.jpg) no-repeat fixed;
-  background-position: center top;
-  background-size: cover;
-  min-height: 100vh;
-
-}
 .emblem {
     display: flex;
     align-items: center;
@@ -157,6 +149,19 @@ body {
     z-index: 2;
     height: 100%;
 } */
+.welcomeHeader {
+  background-color: rgba(128, 184, 137, 0); 
+  text-decoration:underline;
+  color: rgb(0, 0, 0);
+  font-family: 'Special Elite', cursive;
+  font-size: 3.8vw;
+}
+.welcomeText {
+  font-size: 0.8rem;
+}
+.welcomeLead {
+  font-size: 1rem;
+}
 
 @media (min-width: 992px) {
     .offcanvas-body.bg-dark {
@@ -173,11 +178,24 @@ body {
       font-size: 1.5em;
     }
 }
-@media (max-width: 1199px) {
-  /* #john {
-    opacity: 0.25;
-  } */
+@media (min-width: 1362px) {
+  .welcomeText {
+    font-size: 1rem;
+  }
+  .welcomeLead {
+    font-size: 1.1rem;
+  }
 }
+@media (min-width: 1592px) {
+  .welcomeText {
+    font-size: 1.2rem;
+  }
+  .welcomeLead {
+    font-size: 1.4rem;
+  }
+  
+}
+
 footer{
     /* background: url('images/trees.jfif') no-repeat fixed !important;
     background-position: center bottom;
@@ -186,32 +204,7 @@ footer{
     min-height: 10vh;
     background-color: rgb(128, 184, 136);
 }
-.welcomeHeader {
-  background-color: rgba(128, 184, 137, 0); 
-  text-decoration:underline;
-  height: 3em;
-  position: relative;
-  right: 28vw;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 3.8vw;
-}
-.welcomeText {
-  background-color: rgba(0, 0, 0, 0.664);
-    /* display: flex;
-    justify-content: center;
-    z-index: 2;
-    position: relative; */
-    /* bottom: 10em;
-    right: 10em; */
-    /* padding: 40px;
-    background-color: rgb(0, 0, 0);
-    color: white;
-*/
-  overflow-y: scroll;
-  height: 40vh;
-  font-size: 1.2em;
-}
+
 
 
 .box-3 { background-color: rgb(128, 184, 136); }

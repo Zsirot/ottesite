@@ -1,7 +1,7 @@
-const welcomeHeader = document.querySelector('.welcomeHeader')
+const john = document.querySelector('.john')
 const scrollDown = document.querySelector('.scrollDown')
 
 
 scrollDown.addEventListener('click', function () {
-    welcomeHeader.scrollIntoView(true)
+    john.scrollIntoView(true)
 })
