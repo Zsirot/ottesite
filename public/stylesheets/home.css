@@ -19,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    background: url('images/pathWoods.jfif') no-repeat fixed;
+    background: url('/images/pathWoods.jfif') no-repeat fixed;
     background-position: center bottom;
     background-size: cover;
     min-height: 100vh;
