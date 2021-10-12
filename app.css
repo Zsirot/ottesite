@@ -155,6 +155,7 @@ body {
 .john-container{
   position: relative;
 
+
 }
 .imageOverlay {
   position: absolute;
@@ -171,13 +172,13 @@ body {
   color: #fff;
   background: rgba(0, 0, 0, 0.5); 
 }
-.welcomeHeader {
+/* .welcomeHeader {
   background-color: rgba(128, 184, 137, 0); 
-  text-decoration:underline;
   color: rgb(0, 0, 0);
-  font-family: 'Special Elite', cursive;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   font-size: 3.8vw;
-}
+} */
 .welcomeText {
   font-size: 0.8rem;
 }
