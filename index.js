@@ -19,6 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.render('home')
 })
+app.get('/contact', (req, res) => {
+    res.render('contact')
+})
 
 
 

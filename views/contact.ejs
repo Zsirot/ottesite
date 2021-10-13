@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate') %>
+
+
+
+    <div class="container w-80 d-flex flex-column justify-content-center">
+        <h2 class="mt-5 text-center">Get in touch</h2>
+        <form>
+            <div class="row">
+                <div class="mb-3">
+                    <label for="Name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Phone Number</label>
+                        <input type="number" class="form-control" id="number">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" aria-describedby="subject">
+
+                    </div>
+                    <div class="mb-3 col-6 d-flex justify-content-end d-flex flex-column">
+                        <label for="message" class="m-1 ms-3">Message</label>
+                        <textarea class="form-control mx-3" name="" id="message" cols="25" rows="10">
+                        </textarea>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-100 d-flex justify-content-end">
+                <div class="d-flex justify-content-end" style="width: 200px; height: 150px;">
+                    <div class="box-3">
+                        <div class="button button-three">
+                            <span>Send</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
