@@ -25,6 +25,9 @@ app.get('/contact', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about')
 })
+app.get('/services', (req, res) => {
+    res.render('services')
+})
 
 
 
