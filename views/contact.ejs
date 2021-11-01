@@ -1,8 +1,9 @@
 <% layout('layouts/boilerplate') %>
     <title>Contact | John A. Otte</title>
     <link rel="stylesheet" href="/stylesheets/contact.css">
-    <h1 class="h-50 mt-5 text-center" style="font-family: 'Poppins', sans-serif;">Get in touch</h1>
-    <div class="row contact-container d-flex align-items-evenly mx-2">
+    <h1 class="h-50 mt-5 text-center" style="font-family: 'Poppins', sans-serif;" data-aos="zoom-in">Get in touch
+    </h1>
+    <div class="row contact-container d-flex align-items-evenly mx-2" data-aos="fade-in">
         <div class="col-lg-1"></div>
 
         <div class="col-lg-4 d-flex flex-column justify-content-evenly">
@@ -58,18 +59,16 @@
                     </div>
 
                 </div>
-                <button>Submit</button>
+                <button class="hidden-submit" style="display: none;">Submit</button>
                 <div class="d-flex justify-content-end">
                     <div class="d-flex justify-content-end pe-4 pt-3" style="width: 200px; height: 150px;">
                         <div class="box-3">
-                            <div class="button button-three">
+                            <div class="button button-three shown-submit">
                                 <span>Send</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <button></button>
             </form>
         </div>
         <div class="col-lg-1"></div>

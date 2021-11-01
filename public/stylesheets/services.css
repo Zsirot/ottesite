@@ -1,0 +1,13 @@
+:root {
+    --lightgreen: rgb(236 250 239);
+  }
+
+.green-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: var(--lightgreen);
+    background-position: center bottom;
+    background-size: cover;
+}

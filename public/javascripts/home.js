@@ -1,7 +1,7 @@
-const john = document.querySelector('.john')
+const introContainer = document.querySelector('.intro-container')
 const scrollDown = document.querySelector('.scrollDown')
 
 
 scrollDown.addEventListener('click', function () {
-    john.scrollIntoView(true)
+    introContainer.scrollIntoView(true)
 })
