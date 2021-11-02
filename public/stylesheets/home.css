@@ -230,6 +230,14 @@ body {
   
 }
 
+.link {
+  color: black;
+  font-family: 'Poppins', sans-serif
+}
+.link:hover {
+  color: rgb(72, 150, 82);
+}
+
 
 
 footer{
