@@ -9,8 +9,6 @@ if (process.env.NODE_ENV !== 'production') { //if we ar enot in production mode
     require('dotenv').config();//require our .env file,
 }
 
-const email = process.env.EMAIL
-
 app.set('views', path.join(__dirname, 'views'));
 
 app.engine('ejs', ejsMate);
@@ -69,8 +67,8 @@ app.get('/services', (req, res) => {
 
 
 
-
-app.listen(3000, () => {
-    console.log("APP IS LISTENING ON PORT 3000!")
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`APP IS LISTENING ON PORT ${port}`)
 })
 
