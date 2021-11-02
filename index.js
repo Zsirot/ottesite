@@ -54,6 +54,7 @@ app.post('/contact', (req, res) => {
             res.send('success')
         }
     })
+    res.redirect('/contact')
 })
 app.get('/about', (req, res) => {
     res.render('about')
