@@ -1,8 +1,18 @@
 
+:root {
+  --lightgreen: rgb(236 250 239);
+}
 * {
 box-sizing: border-box;
 }
+.page-title {
+  /* border: 1px solid black; */
+  height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+}
 
 body { 
     font-family: 'Zen Antique Soft', serif;
