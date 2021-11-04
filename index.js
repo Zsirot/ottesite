@@ -178,8 +178,8 @@ app.get('/about', (req, res) => {
 app.get('/services', (req, res) => {
     res.render('services')
 })
-app.get('/videos', (req, res) => {
-    res.render('videos', { videoData })
+app.get('/video', (req, res) => {
+    res.render('video', { videoData })
 })
 
 
