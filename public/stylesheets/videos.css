@@ -1,0 +1,12 @@
+:root {
+    --lightgreen: rgb(236 250 239);
+  }
+
+/* .modal-footer, .modal-header {
+    background-color: rgb(33 37 41);
+} */
+
+.modal-body, .modal-footer {
+    background-color: var(--lightgreen);
+}
+

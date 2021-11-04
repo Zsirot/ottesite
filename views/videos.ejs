@@ -1,27 +1,70 @@
 <% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/videos.css">
     <title>Videos | John A. Otte</title>
     <h1 class="text-center page-title" style="font-family: 'Poppins', sans-serif;" data-aos="zoom-in">Videos
     </h1>
 
 
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <%for (let video of videoData) { %>
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center mx-3">
+        <%for (let [i, video] of videoData.entries()) { %>
 
             <div class="col mb-4">
-                <div class="card h-100">
-                    <div class="ratio ratio-16x9 my-5 interview-container">
-                        <% console.log(video.url) %>
-                            <iframe src="https://drive.google.com/file/d/19K0P9n0ulqItXjiWWIyJ4RAAjmM4rmVT/preview"
-                                width="640" height="480" allow="autoplay"></iframe>
+                <div class="card h-100 bg-dark">
+                    <!-- Button trigger modal -->
+                    <input type="image" class="btn thumb" data-bs-toggle="modal" data-bs-target="#videoModal<%=i%>"
+                        src="/images/videothumbnails/<%=video.img%>">
+                    </input>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="videoModal<%=i%>" data-bs-backdrop="static" tabindex="-1"
+                        aria-labelledby="videoModalLabel<%=i%>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="videoModalLabel<%=i%>">
+                                        John A. Otte Interview Series
+                                    </h5>
+                                    <button type="button" class="btn-close stop-video" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ratio ratio-16x9 my-5 interview-container">
+                                        <% console.log(video.url) %>
+                                            <iframe id="video<%=i%>" class="youtube-video" width="560" height="315"
+                                                src="https://www.youtube.com/embed/<%=video.url%>?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+
+                                    <button type="button" class="btn btn-success stop-video" data-bs-dismiss="modal"
+                                        style="font-family: 'Poppins', sans-serif;"> Close Window</button>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <% } %>
     </div>
 
-    <%for (let video of videoData) { %>
 
-        <% } %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const youtubeVideos = document.querySelectorAll('.youtube-video')
+        $('.stop-video').click(function () {
+            console.log('hi')
+            for (let youtubeVideo of youtubeVideos) {
+                youtubeVideo.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+            }
 
-            <script src="/javascripts/videos.js"></script>
+
+        });
+
+    </script>
+    <script src="/javascripts/videos.js"></script>

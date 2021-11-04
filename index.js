@@ -50,7 +50,8 @@ const scriptSrcUrls = [
     "https://kit.fontawesome.com",
     "https://cdnjs.cloudflare.com",
     "https://cdn.jsdelivr.net",
-    "https://unpkg.com/aos@next/dist/aos.js"
+    "https://unpkg.com/aos@next/dist/aos.js",
+    "https://code.jquery.com/jquery-3.6.0.min.js"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com",
@@ -74,7 +75,6 @@ const fontSrcUrls = [
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            "require-trusted-types-for": ["'script'"],
             defaultSrc: [
 
             ],

@@ -1,6 +1,6 @@
-const iframes = document.querySelectorAll('iframe');
-const closeVideos = document.querySelectorAll('.close-video');
-const thumbs = document.querySelectorAll('.thumb');
+// const iframes = document.querySelectorAll('iframe');
+// const closeVideos = document.querySelectorAll('.close-video');
+// const thumbs = document.querySelectorAll('.thumb');
 
 
 
@@ -12,13 +12,13 @@ const thumbs = document.querySelectorAll('.thumb');
 //     })
 // }
 
-// const stopAllYouTubeVideos = () => {
-//     const iframes = document.querySelectorAll('iframe');
-//     Array.prototype.forEach.call(iframes, iframe => {
-//         iframe.contentWindow.postMessage(JSON.stringify({
-//             event: 'command',
-//             func: 'stopVideo'
-//         }), '*');
-//     });
-// }
+
+
 // stopAllYouTubeVideos();
+
+// for (let closeVideo of closeVideos) {
+//     closeVideo.addEventListener('click', function () {
+//         stopAllYouTubeVideos()
+//     })
+// }
+
