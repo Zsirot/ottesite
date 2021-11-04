@@ -30,12 +30,11 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="ratio ratio-16x9 my-5 interview-container">
-                                        <% console.log(video.url) %>
-                                            <iframe id="video<%=i%>" class="youtube-video" width="560" height="315"
-                                                src="https://www.youtube.com/embed/<%=video.url%>?enablejsapi=1&version=3&playerapiid=ytplayer&rel=0"
-                                                title="YouTube video player" frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen></iframe>
+                                        <iframe id="video<%=i%>" class="youtube-video" width="560" height="315"
+                                            src="https://www.youtube.com/embed/<%=video.url%>?enablejsapi=1&version=3&playerapiid=ytplayer&rel=0"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
                                     </div>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
@@ -58,7 +57,6 @@
     <script>
         const youtubeVideos = document.querySelectorAll('.youtube-video')
         $('.stop-video').click(function () {
-            console.log('hi')
             for (let youtubeVideo of youtubeVideos) {
                 youtubeVideo.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
             }
