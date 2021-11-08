@@ -18,6 +18,7 @@ box-sizing: border-box;
   /* border-bottom: 4px double black;
   border-top: 4px double black; */
   height: 12rem;
+  box-shadow: 0px 6px 5px rgb(88, 88, 88), 0px -1px 4px rgb(88, 88, 88);
   
   
 }
