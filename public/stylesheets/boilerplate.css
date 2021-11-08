@@ -1,17 +1,45 @@
-
+@font-face {
+  font-family: fina;
+  src: url(/fonts/opificio_rounded.ttf);
+}
 :root {
   --lightgreen: rgb(236 250 239);
 }
 * {
 box-sizing: border-box;
 }
-.page-title {
-  /* border: 1px solid black; */
-  height: 12rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
+.page-title-container {
+  position: relative; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-bottom: 4px double black;
+  border-top: 4px double black; */
+  height: 12rem;
+  
+  
+}
+.page-title-container:after {
+  content: "";
+  background-image: url(/images/agriculture.png);
+  background-size: 200%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: -1;
+  
+}
+.page-title {
+
+  font-family: fina !important;
+  font-size: 3rem;
+  color: rgb(255, 255, 255)
+  
 }
 
 body { 
@@ -72,7 +100,14 @@ body {
     .navBrand {
       width: 25vw;
     }
-}
+    .page-title-container:after
+    {
+      background-size: 100%;
+    }
+    .page-title {
+      font-size: 3.7rem;
+    } 
+  }
 
 footer{
     min-height: 10vh;
