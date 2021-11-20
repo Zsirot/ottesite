@@ -5,11 +5,6 @@ module.exports = [
         img: 'thumb1.jpg'
     },
     {
-        title: 'How long have you been practicing psychotherapy?',
-        url: '_XRtKqMjBfc',
-        img: 'thumb2.jpg'
-    },
-    {
         title: 'How do people change?',
         url: 'EyJ3BkobeqU',
         img: 'thumb3.jpg'
