@@ -107,18 +107,17 @@ app.post('/contact', (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.EMAIL,
+            user: process.env.SENDING_EMAIL,
             pass: process.env.MAILPASS,
         }
     })
     const mailOptions = {
         from: req.body.email,
-        to: process.env.EMAIL,
+        to: process.env.RECIPIENT,
         subject: `JohnAOtte.com: Message from ${req.body.name}: ${req.body.subject}`,
         text: `Phone Number: ${req.body.phone}
         Email: ${req.body.email} 
         Message: ${req.body.message}`
-
     }
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -139,6 +138,12 @@ app.get('/services', (req, res) => {
 })
 app.get('/video', (req, res) => {
     res.render('video', { videoData })
+})
+app.get('/writings', (req, res) => {
+    res.render('writings')
+})
+app.get('/chapter1', (req, res) => {
+    res.render('chapter1')
 })
 
 
