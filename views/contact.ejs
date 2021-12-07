@@ -84,45 +84,61 @@
                 </div>
             </form>
         </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8 d-flex flex-column justify-content-center">
+                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseDetails" role="button"
+                    aria-expanded="false" aria-controls="collapseExample" style="font-family: 'Poppins', sans-serif;">
+                    View rates and payment information
+                </a>
+                <div class="collapse" id="collapseDetails">
+                    <div class="card card-body">
+                        <div>
+                            <span class="fw-bold">Cost per session</span>
+                            <span>$175</span>
+                        </div>
+                        <div>
+                            <span class="fw-bold">Sliding Scale</span>
+                            <span>Yes</span>
+                        </div>
+                        <div>
+                            <span class="fw-bold">Pay By:</span>
+                            <span>American Express, Cash, Check, Discover, Health Savings Account, Mastercard,
+                                Visa</span>
+                        </div>
+                        <br>
+                        <p class="fst-italic">Please note, I do not file insurance. I will provide you with a bill that
+                            you can
+                            file. I will also help you with filing the claim, filling out forms, etc.</p>
+                        <p class="fs-6 fw-bold" style="font-size: 0.9rem!important;">Call me or send a message above
+                            with
+                            any
+                            questions</p>
 
-    </div>
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.getElementsByClassName('validated-form');
-                // Loop over them and prevent submission
-                const validation = Array.from(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
 
 
-        let lastTop = sessionStorage.getItem("sidebar-scroll");
-        var scrollOptions = {
-            left: 0,
-            top: lastTop,
-            behavior: 'auto'
-        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    const forms = document.getElementsByClassName('validated-form');
+                    // Loop over them and prevent submission
+                    const validation = Array.from(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
 
-        if (lastTop !== null) {
-            window.scroll(scrollOptions)
-        }
-
-        let scrollPosition = null
-        window.addEventListener('beforeunload', () => {
-            scrollPosition = document.documentElement.scrollTop //on submit, define scroll position as current
-            sessionStorage.setItem("sidebar-scroll", scrollPosition); ///place that postion in the localstorage
-
-        })
-    </script>
-    <script src="/javascripts/contact.js"></script>
+        </script>
+        <script src="/javascripts/contact.js"></script>

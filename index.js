@@ -25,16 +25,11 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: true, //looks like this is already default, but a good security feature
-        expires: Date.now() + 1000 * 60 * 60 * 24, //since expirations are in milliseconds, we add a day to the date
-        maxAge: 1000 * 60 * 60 * 24, //also a day
-        cookie: {
-            httpOnly: true,
-            expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: true,
-            sameSite: 'none'
-        }
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        // secure: true,
+        // sameSite: 'none'
     }
 }
 
