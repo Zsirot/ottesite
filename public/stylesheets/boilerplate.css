@@ -9,6 +9,15 @@
 box-sizing: border-box;
 }
 
+.btn-success {
+  background-color: rgb(141, 191, 148);
+  border-color: transparent;
+}
+.btn-success:active, .btn-success:hover, .btn-success:focus{
+  background-color: rgb(126, 180, 134);
+  border-color: transparent;
+}
+
 .page-title-container {
   position: relative; 
   width: 100%;

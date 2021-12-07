@@ -141,7 +141,6 @@ app.post('/contact', (req, res) => {
                     throw new AppError('Outgoing message failed, please contact by phone', error.status)
                 } else {
                     console.log('Email Sent: ' + info.response)
-                    res.send('success')
                 }
             })
             req.flash('success', 'Message sent successfully')

@@ -15,6 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600&family=Special+Elite&Josefin+Sans:wght@300;400&family=Zen+Antique+Soft&family=Poppins:wght@100;200&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <link rel="stylesheet" href="/stylesheets/home.css">
@@ -232,9 +233,8 @@
     </div>
     <div class="image-container">
         <div class="white-container d-flex flex-column align-items-center justify-content-center">
-            <h2 class="mt-5 text-center" style="font-family: 'Poppins', sans-serif;" data-aos="fade-in"
-                data-aos-offset="-50"> See a video
-                series from John</h2>
+            <h2 class="mt-5 text-center mx-3" style="font-family: 'Poppins', sans-serif;" data-aos="fade-in"
+                data-aos-offset="-50">Watch my video series below</h2>
             <div class="ratio ratio-16x9 my-5 interview-container" data-aos="zoom-in">
                 <iframe width="560" height="315"
                     src="https://www.youtube.com/embed/videoseries?list=PLjdiHZsQSex7PFvO8p2gtxmujRxhdwGMj&rel=0"
@@ -243,14 +243,15 @@
                     allowfullscreen></iframe>
             </div>
         </div>
-        <!-- <div>
-            <button class="btn btn-success">Next Video</button>
-        </div> -->
-        <div class="fs-5 mb-5 text-center" style="font-family: 'Poppins', sans-serif;">After starting the video, Click
-            the <i class="fas fa-step-forward"></i> icon to skip to the next video
+        <div class="fs-5 mb-5 mx-4 text-center" style="font-family: 'Poppins', sans-serif;">Click
+            the <span class="material-icons">
+                playlist_play
+            </span> icon to select a video
             <br>
-            <a class="link" href="/video">Click here to
-                browse all videos</a>
+            <div class="mt-2">
+                <a class="link" href="/video">Click here to
+                    browse all videos</a>
+            </div>
         </div>
 
 
@@ -268,7 +269,6 @@
             });
         </script>
         <script src="/javascripts/home.js"></script>
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 </body>
 

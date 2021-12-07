@@ -1,5 +1,5 @@
 :root {
-    --lightgreen: rgb(236 250 239);
+    --lightgreen: linear-gradient(white, rgb(236, 250, 239));
   }
 
 .green-box {
@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color: var(--lightgreen);
+    background-image: var(--lightgreen);
     background-position: center bottom;
     background-size: cover;
 }

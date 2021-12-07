@@ -11,7 +11,6 @@ function persistInput(input) {
     let storedValue = localStorage.getItem(key);
     if (storedValue)
         input.value = storedValue;
-
     input.addEventListener('input', function () {
         localStorage.setItem(key, input.value);
     });
