@@ -1,0 +1,23 @@
+<% if (success.length) { %>
+    <div class="d-flex justify-content-end align-items-end">
+        <div class="alert alert-success text-center alert-dismissible fade show d-flex justify-content-center"
+            role="alert">
+            <strong class="text-center mx-3">
+                <%=success%>
+            </strong>
+            <button type="button" class="btn-close" style="background-color: transparent" data-bs-dismiss="alert"
+                aria-label="Close" style="display: none;"></button>
+        </div>
+    </div>
+    <% } %>
+        <% if (error.length) { %>
+            <div class="d-flex justify-content-end align-items-end">
+                <div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+                    <strong class="text-center mx-3">
+                        <%=error%>
+                    </strong>
+                    <button type="button" class="btn-close" style="background-color: transparent"
+                        data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <% } %>

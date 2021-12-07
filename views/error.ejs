@@ -1,0 +1,13 @@
+<% layout('layouts/boilerplate') %>
+    <title>Error | John A. Otte</title>
+    <link rel="stylesheet" href="">
+    <div class="my-5 page-title-container">
+        <h1 class="text-center page-title aos-init" style="font-family: 'Poppins', sans-serif;" data-aos="zoom-in">
+            ERROR
+        </h1>
+    </div>
+
+    <h1 class="text-center">
+        (<%=err.statusCode%>)
+            <%=err.message%>
+    </h1>

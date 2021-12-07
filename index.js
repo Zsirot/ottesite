@@ -4,9 +4,12 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
+const Joi = require('joi');
 const helmet = require('helmet')
-const session = require('express-session')
-const videoData = require('./videoData')
+const session = require('express-session');
+const flash = require('connect-flash');
+const videoData = require('./videoData');
+const AppError = require('./utils/AppError');
 
 
 
@@ -22,12 +25,16 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: true,
-        // secure: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        secure: true,
-        sameSite: 'none'
+        httpOnly: true, //looks like this is already default, but a good security feature
+        expires: Date.now() + 1000 * 60 * 60 * 24, //since expirations are in milliseconds, we add a day to the date
+        maxAge: 1000 * 60 * 60 * 24, //also a day
+        cookie: {
+            httpOnly: true,
+            expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            secure: true,
+            sameSite: 'none'
+        }
     }
 }
 
@@ -37,14 +44,14 @@ if (process.env.NODE_ENV !== 'production') { //if we ar enot in production mode
 }
 
 app.use(session(sessionOptions))
-
-
+app.use(flash());
 app.use(helmet())
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com",
@@ -101,34 +108,54 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 app.get('/contact', (req, res) => {
-    res.render('contact')
+    res.render('contact', { error: req.flash('error'), success: req.flash('success') })
 })
 app.post('/contact', (req, res) => {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.SENDING_EMAIL,
-            pass: process.env.MAILPASS,
-        }
+
+    const contactSchema = Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        phone: Joi.string().min(10).required(),
+        subject: Joi.string().required(),
+        message: Joi.string().required(),
     })
-    const mailOptions = {
-        from: req.body.email,
-        to: process.env.RECIPIENT,
-        subject: `JohnAOtte.com: Message from ${req.body.name}: ${req.body.subject}`,
-        text: `Phone Number: ${req.body.phone}
+    const { error } = contactSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        req.flash('error', msg);
+        res.redirect('/contact');
+    } else {
+        try {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.SENDING_EMAIL,
+                    pass: process.env.MAILPASS,
+                }
+            })
+            const mailOptions = {
+                from: req.body.email,
+                to: process.env.RECIPIENT,
+                subject: `JohnAOtte.com: Message from ${req.body.name}: ${req.body.subject}`,
+                text: `Phone Number: ${req.body.phone}
         Email: ${req.body.email} 
         Message: ${req.body.message}`
-    }
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-            res.send('error')
-        } else {
-            console.log('Email Sent: ' + info.response)
-            res.send('success')
+            }
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                    res.send('error')
+                } else {
+                    console.log('Email Sent: ' + info.response)
+                    res.send('success')
+                }
+            })
+            req.flash('success', 'Message sent successfully')
+            res.redirect('/contact')
+        } catch (e) {
+            throw new AppError('Outgoing message failed, please contact by phone', e.status)
         }
-    })
-    res.redirect('/contact')
+    }
 })
 app.get('/about', (req, res) => {
     res.render('about')
@@ -146,6 +173,16 @@ app.get('/chapter1', (req, res) => {
     res.render('chapter1')
 })
 
+app.all('*', (req, res, next) => {
+    next(new AppError('Page Not Found', 404))
+})
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'Oh No, Something Went Wrong!'
+    res.status(statusCode).render('error', { err, statusCode })
+    // res.redirect(`${req.originalUrl}`) //save this for flash error redirection
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

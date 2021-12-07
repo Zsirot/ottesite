@@ -6,13 +6,15 @@
             GET IN TOUCH
         </h1>
     </div>
+
     <div class="row contact-container d-flex align-items-evenly mx-2" data-aos="fade-in">
 
 
         <div class="col-lg-5 d-flex flex-column justify-content-evenly">
             <div class="my-3 px-5 text-center fs-5 lh-large">
                 This is where the rubber meets the road: making that first contact. You
-                can call me, send me a text, or send me an email (using the form on this page), and I'll get back to you
+                can call me, send me a text, or send me an email (using the form on this page), and I'll get back to
+                you
                 as soon
                 as I can. Whatever
                 method feels right to you is fine with me.
@@ -24,12 +26,15 @@
                 <p>5290 E. Yale Circle, Suite #201</p>
                 <p>Denver, Colorado 80222</p>
                 <p>Phone: 720.635.6274</p>
-                <p>Or, send a message below:</p>
+                <p>Or, send a message using the form:</p>
             </div>
 
 
         </div>
         <div class="container d-flex flex-column col-lg-6 fs-5">
+            <div class="d-flex justify-content-center">
+                <%- include('./partials/flash') %>
+            </div>
             <form class="contact-form validated-form" action="/contact" method="POST" novalidate>
                 <div class="row mt-5">
                     <div class="mb-3 col-12 pe-4">
@@ -100,5 +105,24 @@
                 });
             }, false);
         })();
+
+
+        let lastTop = sessionStorage.getItem("sidebar-scroll");
+        var scrollOptions = {
+            left: 0,
+            top: lastTop,
+            behavior: 'auto'
+        }
+
+        if (lastTop !== null) {
+            window.scroll(scrollOptions)
+        }
+
+        let scrollPosition = null
+        window.addEventListener('beforeunload', () => {
+            scrollPosition = document.documentElement.scrollTop //on submit, define scroll position as current
+            sessionStorage.setItem("sidebar-scroll", scrollPosition); ///place that postion in the localstorage
+
+        })
     </script>
     <script src="/javascripts/contact.js"></script>
