@@ -2,6 +2,10 @@
     --lightgreen: linear-gradient(white, rgb(236, 250, 239));
   }
 
+.fs-6 {
+  font-size: 1.03rem!important;
+}
+
 .green-box {
     display: flex;
     justify-content: center;
