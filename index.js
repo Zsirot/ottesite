@@ -35,7 +35,6 @@ const sessionOptions = {
 
 if (process.env.NODE_ENV !== 'production') { //if we ar enot in production mode
     require('dotenv').config();//require our .env file,
-
 }
 
 app.use(session(sessionOptions))
@@ -139,7 +138,7 @@ app.post('/contact', (req, res) => {
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     console.log(error);
-                    throw new AppError('Outgoing message failed, please contact by phone', e.status)
+                    throw new AppError('Outgoing message failed, please contact by phone', error.status)
                 } else {
                     console.log('Email Sent: ' + info.response)
                     res.send('success')
