@@ -139,7 +139,7 @@ app.post('/contact', (req, res) => {
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     console.log(error);
-                    res.send('error')
+                    throw new AppError('Outgoing message failed, please contact by phone', e.status)
                 } else {
                     console.log('Email Sent: ' + info.response)
                     res.send('success')
