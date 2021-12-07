@@ -49,6 +49,7 @@ box-sizing: border-box;
 body { 
     font-family: 'Zen Antique Soft', serif;
     font-weight: normal;
+    line-height: 2em;
     margin: 0;
     padding: 0;
     border: 0; 
