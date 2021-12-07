@@ -9,7 +9,6 @@ shownSubmit.addEventListener('click', function () {
 function persistInput(input) {
     let key = "input-" + input.id;
     let storedValue = localStorage.getItem(key);
-    console.log(storedValue)
     if (storedValue)
         input.value = storedValue;
 
