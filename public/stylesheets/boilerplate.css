@@ -79,7 +79,7 @@ body {
   border: none;
 }
 .nav-item a {
-    margin: 7px 7px;
+    margin: 7px 12px;
     text-decoration: none;
     z-index: 5;
     font-family: 'Poppins', sans-serif;
