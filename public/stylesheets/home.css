@@ -8,9 +8,9 @@ box-sizing: border-box;
 
 
 body { 
-    font-family: 'Zen Antique Soft', serif;
+    font-family: 'Poppins', sans-serif;
     background-image: linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
-    font-weight: normal;
+    font-weight: 300;
     line-height: 2em;
     margin: 0;
     padding: 0;
@@ -138,7 +138,7 @@ body {
     margin: 7px 12px;
     text-decoration: none;
     z-index: 5;
-    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
     font-size: 1.5rem;
     cursor: pointer;
     color: white;

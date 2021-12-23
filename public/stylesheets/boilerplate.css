@@ -47,8 +47,8 @@ box-sizing: border-box;
 }
 
 body { 
-    font-family: 'Zen Antique Soft', serif;
-    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
     line-height: 2em;
     margin: 0;
     padding: 0;
@@ -83,6 +83,7 @@ body {
     text-decoration: none;
     z-index: 5;
     font-family: 'Poppins', sans-serif;
+    font-weight: 200;
     font-size: 1.5rem;
     cursor: pointer;
     color: white;

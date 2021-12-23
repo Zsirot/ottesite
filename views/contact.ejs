@@ -27,6 +27,12 @@
                 <p>Denver, Colorado 80222</p>
                 <p>Phone: 720.635.6274</p>
                 <p>Or, send a message using the form:</p>
+                <div class="row fst-italic m-4" style="font-size: 0.8rem;">Please do not send personal
+                    health
+                    information through
+                    this form. We are
+                    not able to answer mental health related questions or provide specific mental health advice through
+                    the form.</div>
             </div>
 
 
@@ -35,55 +41,62 @@
             <div class="d-flex justify-content-center">
                 <%- include('./partials/flash') %>
             </div>
-            <form class="contact-form validated-form" action="/contact" method="POST" novalidate>
-                <div class="row mt-5">
-                    <div class="mb-3 col-12 pe-4">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                        <div class="valid-feedback">Looks Good!</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                aria-describedby="emailHelp" required>
+            <div class="d-flex flex-column">
+                <h1 class="text-center my-3" style="font-weight: 200;">Contact</h1>
+                <form class="contact-form validated-form" action="/contact" method="POST" novalidate>
+                    <div class="row my-3">
+                        <div class="mb-3 col-12" style="padding-right: 2.3rem">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
                             <div class="valid-feedback">Looks Good!</div>
                         </div>
-                        <div class="col-6">
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input type="number" class="form-control" id="phone" name="phone" required>
-                            <div class="valid-feedback">Looks Good!</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" name="subject"
-                                aria-describedby="subject" required>
-                            <div class="valid-feedback">Looks Good!</div>
-
-                        </div>
-                        <div class="col-6 d-flex justify-content-end d-flex flex-column">
-                            <label for="message">Message</label>
-                            <textarea class="form-control mt-2" id="message" name="message" cols="25" rows="10"
-                                required></textarea>
-                            <div class="valid-feedback">Looks Good!</div>
-                        </div>
-                    </div>
-
-                </div>
-                <button class="hidden-submit" style="display: none;">Submit</button>
-                <div class="d-flex justify-content-end">
-                    <div class="d-flex justify-content-end pe-4 pt-4" style="width: 200px; height: 150px;">
-                        <div class="box-3">
-                            <div class="button button-three shown-submit">
-                                <span title="submit-message" tabindex=0
-                                    style="font-family: 'Poppins', sans-serif;">Send</span>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    aria-describedby="emailHelp" required>
+                                <div class="valid-feedback">Looks Good!</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="number" class="form-control" id="phone" name="phone" required>
+                                <div class="valid-feedback">Looks Good!</div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-6 d-flex flex-column justify-content-between">
+                                <div class="row" style="padding-left: 0.75rem; padding-right: 0.75rem;">
+                                    <label for="subject" class="form-label p-0">Subject</label>
+                                    <input type="text" class="form-control px-1" id="subject" name="subject"
+                                        aria-describedby="subject" required>
+                                    <div class="valid-feedback">Looks Good!</div>
+                                </div>
+                                <div class="d-flex justify-content-start align-items-center row mt-4">
+                                    <div class="d-flex align-items-end" style="width: 200px;">
+                                        <div class="box-3">
+                                            <div class="button button-three shown-submit">
+                                                <span title="submit-message" tabindex=0
+                                                    style="font-family: 'Poppins', sans-serif;">Send</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-6 d-flex justify-content-start d-flex flex-column">
+                                <label for="message">Message</label>
+                                <textarea class="form-control mt-2" id="message" name="message" cols="20" rows="4"
+                                    required></textarea>
+                                <div class="valid-feedback">Looks Good!</div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-            </form>
+                    <button class="hidden-submit" style="display: none;">Submit</button>
+
+                </form>
+            </div>
         </div>
         <div class="row d-flex justify-content-center">
             <div class="col-md-8 d-flex flex-column justify-content-center">
