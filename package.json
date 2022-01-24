@@ -1,7 +1,7 @@
 {
   "name": "ottesite",
   "version": "1.0.0",
-  "description": "John specializes in therapy through a novel, effective, therapeutic approach aimed at treating addiction and depression.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
