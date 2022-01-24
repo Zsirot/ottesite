@@ -112,9 +112,10 @@ app.post('/contact', (req, res) => {
         phone: Joi.string().min(10).required(),
         subject: Joi.string().required(),
         message: Joi.string().required(),
+        honey: Joi.string().allow('')
     })
     const { error } = contactSchema.validate(req.body)
-    if (error) {
+    if (error || contactSchema.honey !== undefined) {
         const msg = error.details.map(el => el.message).join(',')
         req.flash('error', msg);
         res.redirect('/contact');
