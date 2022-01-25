@@ -1,0 +1,3 @@
+# robots.txt for https://www.johnaotte.com
+User-agent: *
+Disallow:/*/sitemap.xml
