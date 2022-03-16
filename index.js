@@ -166,6 +166,9 @@ app.get('/writings', (req, res) => {
 app.get('/chapter1', (req, res) => {
     res.render('chapter1')
 })
+app.get('/blog1', (req, res) => {
+    res.render('blog1')
+})
 
 app.all('*', (req, res, next) => {
     next(new AppError('Page Not Found', 404))
