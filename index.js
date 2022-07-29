@@ -166,8 +166,17 @@ app.get('/writings', (req, res) => {
 app.get('/chapter1', (req, res) => {
     res.render('chapter1')
 })
+app.get('/chapter2', (req, res) => {
+    res.render('chapter2')
+})
 app.get('/blog1', (req, res) => {
     res.render('blog1')
+})
+app.get('/blog2', (req, res) => {
+    res.render('blog2')
+})
+app.get('/blog3', (req, res) => {
+    res.render('blog3')
 })
 
 app.all('*', (req, res, next) => {
