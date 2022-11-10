@@ -169,6 +169,12 @@ app.get('/chapter1', (req, res) => {
 app.get('/chapter2', (req, res) => {
     res.render('chapter2')
 })
+app.get('/chapter3', (req, res) => {
+    res.render('chapter3')
+})
+app.get('/chapter4', (req, res) => {
+    res.render('chapter4')
+})
 app.get('/blog1', (req, res) => {
     res.render('blog1')
 })
