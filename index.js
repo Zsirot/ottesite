@@ -184,6 +184,9 @@ app.get('/blog2', (req, res) => {
 app.get('/blog3', (req, res) => {
     res.render('blog3')
 })
+app.get('/holidayblog', (req, res) => {
+    res.render('holidayblog')
+})
 
 app.all('*', (req, res, next) => {
     next(new AppError('Page Not Found', 404))
