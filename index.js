@@ -53,7 +53,10 @@ const scriptSrcUrls = [
     "https://cdnjs.cloudflare.com",
     "https://cdn.jsdelivr.net",
     "https://unpkg.com/aos@next/dist/aos.js",
-    "https://code.jquery.com/jquery-3.6.0.min.js"
+    "https://code.jquery.com/jquery-3.6.0.min.js",
+    "*.jotform.com",
+    "*.jotfor.ms",
+    "https://hcaptcha.com"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com",
@@ -62,24 +65,37 @@ const styleSrcUrls = [
     "https://use.fontawesome.com",
     "https://cdn.jsdelivr.net",
     "https://cdnjs.cloudflare.com",
-    "https://unpkg.com"
+    "https://unpkg.com",
+    "*.jotfor.ms",
+    "*.jotform.com"
 ];
 const childSrcUrls = [
     "https://www.youtube.com",
-    "https://drive.google.com"
+    "https://drive.google.com",
+    "*.hcaptcha.com",
+    "*.jotform.com"
 ]
 
 const fontSrcUrls = [
     "https://fonts.gstatic.com",
     "https://cdnjs.cloudflare.com",
+    "*.jotfor.ms"
 ];
+const imageSrcUrls = [
+    "https://cdn.jotfor.ms/",
+    "*.jotfor.ms",
+    "*.jotform.com"
+];
+const connectSrcUrls = [
+    "*.jotform.com"
+]
 
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [
             ],
-            connectSrc: ["'self'"],
+            connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", "'unsafe-eval'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
@@ -90,7 +106,8 @@ app.use(
                 "blob:",
                 "data:",
                 "https://images.unsplash.com",
-                "https://i.ytimg.com"
+                "https://i.ytimg.com",
+                ...imageSrcUrls
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },

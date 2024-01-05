@@ -9,97 +9,6 @@
 
     <div class="row contact-container d-flex align-items-evenly mx-2" data-aos="fade-in">
 
-
-        <div class="col-lg-5 d-flex flex-column justify-content-evenly">
-            <div class="my-3 px-5 text-center fs-6 lh-lg">
-                This is where the rubber meets the road: making that first contact. You
-                can call me, send me a text, or send me an email (using the form on this page), and I'll get back to
-                you
-                as soon
-                as I can. Whatever
-                method feels right to you is fine with me.
-                Please give yourself credit for doing this, it takes courage and strength to ask for help.
-            </div>
-
-            <div class="text-center my-3 fs-5">
-                <h3 class="my-3" style="font-family: 'Poppins', sans-serif;">Address:</h3>
-                <p>5290 E. Yale Circle, Suite #201</p>
-                <p>Denver, Colorado 80222</p>
-                <p>Phone: 720.635.6274</p>
-                <p>Or, send a message using the form:</p>
-                <div class="row fst-italic m-4" style="font-size: 0.8rem;">Please do not send personal
-                    health
-                    information through
-                    this form. We are
-                    not able to answer mental health related questions or provide specific mental health advice through
-                    the form.</div>
-            </div>
-
-
-        </div>
-        <div class="container d-flex flex-column col-lg-6 fs-5">
-            <div class="d-flex justify-content-center">
-                <%- include('./partials/flash') %>
-            </div>
-            <div class="d-flex flex-column">
-                <h1 class="text-center my-3" style="font-weight: 200;">Contact</h1>
-                <form class="contact-form validated-form" action="/contact" method="POST" novalidate>
-                    <div class="row my-3">
-                        <div class="mb-3 col-12" style="padding-right: 2.3rem">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                            <div class="valid-feedback">Looks Good!</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    aria-describedby="emailHelp" required>
-                                <div class="valid-feedback">Looks Good!</div>
-                            </div>
-                            <div class="col-6">
-                                <label for="phone" class="form-label">Phone Number</label>
-                                <input type="number" class="form-control" id="phone" name="phone" required>
-                                <div class="valid-feedback">Looks Good!</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 d-flex flex-column justify-content-between">
-                                <div class="row" style="padding-left: 0.75rem; padding-right: 0.75rem;">
-                                    <label for="subject" class="form-label p-0">Subject</label>
-                                    <input type="text" class="form-control px-1" id="subject" name="subject"
-                                        aria-describedby="subject" required>
-                                    <div class="valid-feedback">Looks Good!</div>
-                                </div>
-                                <input type="hidden" class="form-control" id="honey" name="honey"
-                                    aria-describedby="subject" required>
-                                <div class="d-flex justify-content-start align-items-center row mt-4">
-                                    <div class="d-flex align-items-end" style="width: 200px;">
-                                        <div class="box-3">
-                                            <div class="button button-three shown-submit">
-                                                <span title="submit-message" tabindex=0
-                                                    style="font-family: 'Poppins', sans-serif;">Send</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="col-6 d-flex justify-content-start d-flex flex-column">
-                                <label for="message">Message</label>
-                                <textarea class="form-control mt-2" id="message" name="message" cols="20" rows="4"
-                                    required></textarea>
-                                <div class="valid-feedback">Looks Good!</div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <button class="hidden-submit" style="display: none;">Submit</button>
-
-                </form>
-            </div>
-        </div>
         <div class="row d-flex justify-content-center">
             <div class="col-md-8 d-flex flex-column justify-content-center">
                 <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseDetails" role="button"
@@ -136,6 +45,38 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-5 d-flex flex-column justify-content-start">
+            <div class="my-5 px-5 text-center fs-6 lh-lg">
+                This is where the rubber meets the road: making that first contact. You
+                can call me, send me a text, or send me an email (using the form on this page), and I'll get back to
+                you
+                as soon
+                as I can. Whatever
+                method feels right to you is fine with me.
+                Please give yourself credit for doing this, it takes courage and strength to ask for help.
+            </div>
+
+            <div class="text-center my-3 fs-5">
+                <h3 class="my-3" style="font-family: 'Poppins', sans-serif;">Address:</h3>
+                <p>5290 E. Yale Circle, Suite #201</p>
+                <p>Denver, Colorado 80222</p>
+                <p>Phone: 720.635.6274</p>
+                <p>Or, send a message using the form:</p>
+                <div class="row fst-italic m-4" style="font-size: 0.8rem;">Please do not send personal
+                    health
+                    information through
+                    this form. We are
+                    not able to answer mental health related questions or provide specific mental health advice through
+                    the form.</div>
+            </div>
+
+
+        </div>
+        <div class="container col-lg-5 d-flex flex-column justify-content-evenly">
+            <script type="text/javascript" src="https://form.jotform.com/jsform/240037725359155"></script>
+        </div>
+
+
         <script>
             // Starter JavaScript for disabling form submissions if there are invalid fields
             (function () {
