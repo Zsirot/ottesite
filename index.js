@@ -187,6 +187,12 @@ app.get('/blog3', (req, res) => {
 app.get('/blog4', (req, res) => {
     res.render('blog4')
 })
+app.get('/blog5', (req, res) => {
+    res.render('blog5')
+})
+app.get('/blog6', (req, res) => {
+    res.render('blog6')
+})
 app.get('/holidayblog', (req, res) => {
     res.render('holidayblog')
 })
