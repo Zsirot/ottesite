@@ -4,7 +4,7 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
-const Joi = require('joi');
+// const Joi = require('joi');
 const helmet = require('helmet')
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -123,50 +123,50 @@ app.get('/contact', (req, res) => {
 })
 app.post('/contact', (req, res) => {
 
-    const contactSchema = Joi.object({
-        name: Joi.string().required(),
-        email: Joi.string().email().required(),
-        phone: Joi.string().min(10).required(),
-        subject: Joi.string().required(),
-        message: Joi.string().required(),
-        honey: Joi.string().allow('')
-    })
-    const { error } = contactSchema.validate(req.body)
-    if (error || contactSchema.honey !== undefined) {
-        const msg = error.details.map(el => el.message).join(',')
-        req.flash('error', msg);
-        res.redirect('/contact');
-    } else {
-        try {
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.SENDING_EMAIL,
-                    pass: process.env.MAILPASS,
-                }
-            })
-            const mailOptions = {
-                from: req.body.email,
-                to: process.env.RECIPIENT,
-                subject: `JohnAOtte.com: Message from ${req.body.name}: ${req.body.subject}`,
-                text: `Phone Number: ${req.body.phone}
-        Email: ${req.body.email} 
-        Message: ${req.body.message}`
-            }
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.log(error);
-                    throw new AppError('Outgoing message failed, please contact by phone', error.status)
-                } else {
-                    console.log('Email Sent: ' + info.response)
-                }
-            })
-            req.flash('success', 'Message sent successfully')
-            res.redirect('/contact')
-        } catch (e) {
-            throw new AppError('Outgoing message failed, please contact by phone', e.status)
-        }
-    }
+    // const contactSchema = Joi.object({
+    //     name: Joi.string().required(),
+    //     email: Joi.string().email().required(),
+    //     phone: Joi.string().min(10).required(),
+    //     subject: Joi.string().required(),
+    //     message: Joi.string().required(),
+    //     honey: Joi.string().allow('')
+    // })
+    // const { error } = contactSchema.validate(req.body)
+    // if (error || contactSchema.honey !== undefined) {
+    //     const msg = error.details.map(el => el.message).join(',')
+    //     req.flash('error', msg);
+    //     res.redirect('/contact');
+    // } else {
+    //     try {
+    //         const transporter = nodemailer.createTransport({
+    //             service: 'gmail',
+    //             auth: {
+    //                 user: process.env.SENDING_EMAIL,
+    //                 pass: process.env.MAILPASS,
+    //             }
+    //         })
+    //         const mailOptions = {
+    //             from: req.body.email,
+    //             to: process.env.RECIPIENT,
+    //             subject: `JohnAOtte.com: Message from ${req.body.name}: ${req.body.subject}`,
+    //             text: `Phone Number: ${req.body.phone}
+    //     Email: ${req.body.email} 
+    //     Message: ${req.body.message}`
+    //         }
+    //         transporter.sendMail(mailOptions, (error, info) => {
+    //             if (error) {
+    //                 console.log(error);
+    //                 throw new AppError('Outgoing message failed, please contact by phone', error.status)
+    //             } else {
+    //                 console.log('Email Sent: ' + info.response)
+    //             }
+    //         })
+    //         req.flash('success', 'Message sent successfully')
+    //         res.redirect('/contact')
+    //     } catch (e) {
+    //         throw new AppError('Outgoing message failed, please contact by phone', e.status)
+    //     }
+    // }
 })
 app.get('/about', (req, res) => {
     res.render('about')
