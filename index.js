@@ -210,6 +210,9 @@ app.get('/blog5', (req, res) => {
 app.get('/blog6', (req, res) => {
     res.render('blog6')
 })
+app.get('/blog7', (req, res) => {
+    res.render('blog7')
+})
 app.get('/holidayblog', (req, res) => {
     res.render('holidayblog')
 })
