@@ -215,8 +215,14 @@ app.get("/blog7", (req, res) => {
 app.get("/blog8", (req, res) => {
   res.render("blog8");
 });
+app.get("/blog9", (req, res) => {
+  res.render("blog9");
+});
 app.get("/holidayblog", (req, res) => {
   res.render("holidayblog");
+});
+app.get("/holidayblog2", (req, res) => {
+  res.render("holidayblog2");
 });
 
 app.all("*", (req, res, next) => {
