@@ -77,9 +77,15 @@ const fontSrcUrls = [
   "https://fonts.gstatic.com",
   "https://cdnjs.cloudflare.com",
   "*.jotfor.ms",
+  "data:",
 ];
 const imageSrcUrls = ["https://cdn.jotfor.ms/", "*.jotfor.ms", "*.jotform.com"];
-const connectSrcUrls = ["*.jotform.com"];
+const connectSrcUrls = [
+  "*.jotform.com",
+  "https://cdn.jsdelivr.net",
+  "https://www.youtube.com",
+  "https://youtube.com",
+];
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -95,6 +101,13 @@ app.use(
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       childSrc: ["blob:", ...childSrcUrls],
+      frameSrc: [
+        "'self'",
+        "https://www.youtube.com",
+        "https://youtube.com",
+        "https://form.jotform.com",
+        "*.jotform.com",
+      ],
       objectSrc: [],
       imgSrc: [
         "'self'",
@@ -105,6 +118,7 @@ app.use(
         ...imageSrcUrls,
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
+      mediaSrc: ["'self'", "https://www.youtube.com", "https://youtube.com"],
     },
   })
 );
@@ -170,12 +184,12 @@ app.get("/about", (req, res) => {
 app.get("/services", (req, res) => {
   res.render("services");
 });
-app.get("/video", (req, res) => {
-  res.render("video", { videoData });
-});
-app.get("/writings", (req, res) => {
-  res.render("writings");
-});
+// app.get("/video", (req, res) => {
+//   res.render("video", { videoData });
+// });
+// app.get("/writings", (req, res) => {
+//   res.render("writings");
+// });
 app.get("/chapter1", (req, res) => {
   res.render("chapter1");
 });
