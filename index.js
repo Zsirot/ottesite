@@ -10,6 +10,8 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const videoData = require("./videoData");
 const AppError = require("./utils/AppError");
+const crypto = require("crypto");
+const events = require("./store/events");
 
 app.set("views", path.join(__dirname, "views"));
 
@@ -24,10 +26,9 @@ const sessionOptions = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    // secure: true,
-    // sameSite: 'none'
   },
 };
 
@@ -54,8 +55,6 @@ const scriptSrcUrls = [
   "*.jotform.com",
   "*.jotfor.ms",
   "https://hcaptcha.com",
-  "https://elfsightcdn.com",
-  "https://static.elfsight.com", // Add this line
 ];
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com",
@@ -87,7 +86,6 @@ const connectSrcUrls = [
   "https://cdn.jsdelivr.net",
   "https://www.youtube.com",
   "https://youtube.com",
-  "https://core.service.elfsight.com", // Add this line
 ];
 
 app.use(
@@ -240,6 +238,142 @@ app.get("/holidayblog", (req, res) => {
 });
 app.get("/holidayblog2", (req, res) => {
   res.render("holidayblog2");
+});
+
+// ===========================================================================
+// Calendar (public) + admin (single-password login)
+// ===========================================================================
+function requireAdmin(req, res, next) {
+  if (req.session && req.session.isAdmin) return next();
+  return res.redirect("/login");
+}
+
+// Constant-time comparison against the password in ADMIN_PASSWORD.
+function passwordMatches(input) {
+  const expected = process.env.ADMIN_PASSWORD || "";
+  if (!expected) return false;
+  const a = Buffer.from(String(input || ""));
+  const b = Buffer.from(expected);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+// Simple in-memory brute-force limiter for /login: after MAX_LOGIN_ATTEMPTS
+// failures from one IP, lock that IP out for LOGIN_WINDOW_MS.
+const loginAttempts = new Map(); // ip -> { count, resetAt }
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
+
+function loginLockRemaining(ip) {
+  const rec = loginAttempts.get(ip);
+  if (rec && rec.count >= MAX_LOGIN_ATTEMPTS && Date.now() < rec.resetAt) {
+    return rec.resetAt - Date.now();
+  }
+  return 0;
+}
+
+function recordFailedLogin(ip) {
+  const now = Date.now();
+  let rec = loginAttempts.get(ip);
+  if (!rec || now >= rec.resetAt) rec = { count: 0, resetAt: now + LOGIN_WINDOW_MS };
+  rec.count += 1;
+  if (rec.count >= MAX_LOGIN_ATTEMPTS) rec.resetAt = now + LOGIN_WINDOW_MS; // (re)start the lockout
+  loginAttempts.set(ip, rec);
+  // Keep the map from growing without bound under a distributed attack.
+  if (loginAttempts.size > 5000) {
+    for (const [k, v] of loginAttempts) if (now >= v.resetAt) loginAttempts.delete(k);
+  }
+}
+
+function clearLoginAttempts(ip) {
+  loginAttempts.delete(ip);
+}
+
+// Add display fields (month/day badge + a human "when") for the calendar view.
+function formatEvent(ev) {
+  const d = new Date(ev.start);
+  if (isNaN(d.getTime())) return { ...ev, month: "", day: "", when: ev.start };
+  const hasTime = /T\d{2}:\d{2}/.test(ev.start) && !/T00:00(:00)?$/.test(ev.start);
+  let when = d.toLocaleString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  if (hasTime) {
+    when += " · " + d.toLocaleString("en-US", { hour: "numeric", minute: "2-digit" });
+  }
+  return {
+    ...ev,
+    month: d.toLocaleString("en-US", { month: "short" }).toUpperCase(),
+    day: d.toLocaleString("en-US", { day: "numeric" }),
+    when,
+  };
+}
+
+app.get("/calendar", (req, res) => {
+  res.render("calendar", { events: events.upcoming().map(formatEvent) });
+});
+
+app.get("/login", (req, res) => {
+  if (req.session.isAdmin) return res.redirect("/admin");
+  res.render("login", { error: req.flash("error") });
+});
+
+app.post("/login", (req, res) => {
+  const lockMs = loginLockRemaining(req.ip);
+  if (lockMs > 0) {
+    req.flash("error", `Too many attempts. Please wait ${Math.ceil(lockMs / 60000)} minute(s) and try again.`);
+    return res.redirect("/login");
+  }
+  if (!passwordMatches(req.body.password)) {
+    recordFailedLogin(req.ip);
+    req.flash("error", "Incorrect password.");
+    return res.redirect("/login");
+  }
+  clearLoginAttempts(req.ip);
+  // Regenerate the session on login to prevent session fixation.
+  req.session.regenerate((err) => {
+    if (err) {
+      req.flash("error", "Something went wrong. Please try again.");
+      return res.redirect("/login");
+    }
+    req.session.isAdmin = true;
+    res.redirect("/admin");
+  });
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy(() => res.redirect("/"));
+});
+
+app.get("/admin", requireAdmin, (req, res) => {
+  res.render("admin", {
+    events: events.all(),
+    max: events.MAX_EVENTS,
+    success: req.flash("success"),
+    error: req.flash("error"),
+  });
+});
+
+app.post("/admin/events", requireAdmin, (req, res) => {
+  const { title, start } = req.body;
+  if (!title || !title.trim() || !start) {
+    req.flash("error", "A title and a date/time are both required.");
+    return res.redirect("/admin");
+  }
+  // events.add() truncates over-long fields and returns false when at capacity.
+  if (!events.add(req.body)) {
+    req.flash("error", `You can have at most ${events.MAX_EVENTS} events. Remove one before adding another.`);
+    return res.redirect("/admin");
+  }
+  req.flash("success", "Event added.");
+  res.redirect("/admin");
+});
+
+app.post("/admin/events/:id/delete", requireAdmin, (req, res) => {
+  events.remove(req.params.id);
+  req.flash("success", "Event removed.");
+  res.redirect("/admin");
 });
 
 app.all("*", (req, res, next) => {

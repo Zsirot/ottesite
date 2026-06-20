@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Poppins:wght@300;400;500;600&family=Special+Elite&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/boilerplate.css">
+    <title>Manage events | John A. Otte, PsyD</title>
+</head>
+
+<body class="admin-shell admin-page">
+    <div class="admin-container">
+        <header class="admin-topbar">
+            <div>
+                <a href="/" class="admin-brand">John A. Otte, PsyD</a>
+                <h1 class="admin-heading">Manage events</h1>
+            </div>
+            <div class="admin-actions">
+                <a href="/calendar" class="btn-green" target="_blank">View calendar</a>
+                <form action="/logout" method="POST" class="d-inline">
+                    <button type="submit" class="btn-text">Sign out</button>
+                </form>
+            </div>
+        </header>
+
+        <% if (success && success.length) { %>
+            <div class="admin-alert admin-alert-success"><%= success %></div>
+        <% } %>
+        <% if (error && error.length) { %>
+            <div class="admin-alert admin-alert-error"><%= error %></div>
+        <% } %>
+
+        <div class="admin-grid">
+            <!-- Add an event -->
+            <section class="admin-card">
+                <h2 class="admin-card-title">Add an event</h2>
+                <% if (events.length >= max) { %>
+                    <p class="admin-alert admin-alert-error">You've reached the limit of <%= max %> events. Remove one
+                        below to add another.</p>
+                <% } %>
+                <form action="/admin/events" method="POST" class="admin-form">
+                    <label class="field">
+                        <span class="field-label">Title <span class="req">*</span></span>
+                        <input type="text" name="title" maxlength="140" required>
+                    </label>
+                    <label class="field">
+                        <span class="field-label">Date &amp; time <span class="req">*</span></span>
+                        <input type="datetime-local" name="start" required>
+                    </label>
+                    <label class="field">
+                        <span class="field-label">Location</span>
+                        <input type="text" name="location" maxlength="160"
+                            placeholder="e.g. Office, Suite #201 or Zoom">
+                    </label>
+                    <label class="field">
+                        <span class="field-label">Description</span>
+                        <textarea name="description" rows="3" maxlength="800"></textarea>
+                    </label>
+                    <label class="field">
+                        <span class="field-label">Link (optional)</span>
+                        <input type="text" name="link" maxlength="500" placeholder="example.com or https://...">
+                    </label>
+                    <button type="submit" class="btn-primary-filled" <%= events.length >= max ? "disabled" : "" %>>Add
+                        event</button>
+                </form>
+            </section>
+
+            <!-- Existing events -->
+            <section class="admin-card">
+                <h2 class="admin-card-title">Scheduled events <span class="admin-count"><%= events.length %> / <%= max %></span></h2>
+                <% if (events.length === 0) { %>
+                    <p class="admin-empty">No events yet. Add one using the form.</p>
+                <% } else { %>
+                    <ul class="admin-event-list">
+                        <% events.forEach(function (ev) { %>
+                            <li class="admin-event">
+                                <div class="admin-event-info">
+                                    <span class="admin-event-title"><%= ev.title %></span>
+                                    <span class="admin-event-when">
+                                        <%= new Date(ev.start).toLocaleString("en-US", {
+                                            weekday: "short", month: "short", day: "numeric",
+                                            year: "numeric", hour: "numeric", minute: "2-digit"
+                                        }) %><% if (ev.location) { %> · <%= ev.location %><% } %>
+                                    </span>
+                                </div>
+                                <form action="/admin/events/<%= ev.id %>/delete" method="POST"
+                                    onsubmit="return confirm('Remove this event?');">
+                                    <button type="submit" class="btn-delete" aria-label="Remove event">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<% layout('layouts/boilerplate') %>
+    <title>Events | John A. Otte, PsyD</title>
+
+    <!-- ============================== PAGE HERO ============================== -->
+    <header class="page-hero">
+        <div class="container">
+            <p class="eyebrow">What's coming up</p>
+            <h1 class="page-title">Events</h1>
+            <div class="flourish"><i class="fas fa-star"></i></div>
+            <p class="page-hero-sub">Groups, workshops, and gatherings with Dr. Otte.</p>
+        </div>
+    </header>
+
+    <!-- ============================== EVENTS ============================== -->
+    <section class="section">
+        <div class="container">
+            <% if (!events || events.length === 0) { %>
+                <div class="empty-state" data-aos="fade-up">
+                    <i class="far fa-calendar"></i>
+                    <h2>No events currently planned</h2>
+                    <p>Please check back soon, or <a class="link" href="/contact">get in touch</a> to ask about
+                        upcoming groups and workshops.</p>
+                </div>
+            <% } else { %>
+                <div class="event-list">
+                    <% events.forEach(function (ev) { %>
+                        <article class="event-card" data-aos="fade-up">
+                            <div class="event-date" aria-hidden="true">
+                                <span class="event-month"><%= ev.month %></span>
+                                <span class="event-day"><%= ev.day %></span>
+                            </div>
+                            <div class="event-body">
+                                <h3 class="event-title"><%= ev.title %></h3>
+                                <p class="event-meta">
+                                    <i class="far fa-clock"></i> <%= ev.when %>
+                                    <% if (ev.location) { %>
+                                        <span class="event-dot">·</span>
+                                        <i class="fas fa-location-dot"></i> <%= ev.location %>
+                                    <% } %>
+                                </p>
+                                <% if (ev.description) { %>
+                                    <p class="event-desc"><%= ev.description %></p>
+                                <% } %>
+                                <% if (ev.link) { %>
+                                    <a class="link" href="<%= ev.link %>" target="_blank" rel="noopener">
+                                        More details <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+    </section>

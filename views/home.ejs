@@ -23,6 +23,8 @@
 </head>
 
 <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <!-- ============================== HERO ============================== -->
     <div class="image-container">
         <div class="image">
@@ -47,6 +49,7 @@
                                 <li class="nav-item"><a class="txtgrow" href="/about">About</a></li>
                                 <li class="nav-item"><a class="txtgrow" href="/services">Services</a></li>
                                 <li class="nav-item"><a class="txtgrow" href="/contact">Contact</a></li>
+                                <li class="nav-item"><a class="txtgrow" href="/calendar">Events</a></li>
                                 <li class="nav-item">
                                     <a class="txtgrow" href="https://substack.com/@drotte" target="_blank">Writings</a>
                                 </li>
@@ -72,13 +75,10 @@
                         <div class="hero-cta mt-4" data-aos="fade-up" data-aos-delay="200">
                             <a href="/contact" class="btn-primary-filled">Schedule a Free Consultation</a>
                             <a href="/services" class="btn-primary-ghost">Explore the Approach</a>
-                            <!-- Upcoming Events Bubble: inline pill here on mobile, floats top-right on desktop -->
-                            <div class="events-bubble">
+                            <!-- Upcoming events pill — links to the calendar page -->
+                            <a href="/calendar" class="events-bubble">
                                 <span class="events-text">Upcoming events</span>
-                                <script src="https://elfsightcdn.com/platform.js" async></script>
-                                <div class="elfsight-app-f6a27909-9267-43d3-876d-821655ad399d" data-elfsight-app-lazy>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-6 d-none d-lg-flex justify-content-center hero-image" data-aos="fade-left">

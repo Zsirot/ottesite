@@ -228,6 +228,7 @@ a { color: var(--green-600); }
   .offcanvas.show .offcanvas-body .nav-item:nth-child(3) { animation-delay: 0.24s; }
   .offcanvas.show .offcanvas-body .nav-item:nth-child(4) { animation-delay: 0.31s; }
   .offcanvas.show .offcanvas-body .nav-item:nth-child(5) { animation-delay: 0.38s; }
+  .offcanvas.show .offcanvas-body .nav-item:nth-child(6) { animation-delay: 0.45s; }
 }
 @keyframes navItemIn {
   to { opacity: 1; transform: translateX(0); }
@@ -366,6 +367,7 @@ a { color: var(--green-600); }
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 999px;
   padding: 0.72rem 1.5rem;
+  text-decoration: none;
   animation: fadeInUp 0.6s ease-out;
   transition: background-color 0.25s ease, transform 0.25s ease;
 }
@@ -390,12 +392,15 @@ a { color: var(--green-600); }
 
 /* Scroll-down indicator */
 .scrollDown {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1rem; /* sit just inside the bottom of the hero, in view */
   height: 4em;
   cursor: pointer;
   z-index: 2;
 }
-@keyframes bounce { 50% { transform: translateY(-45%); } }
+@keyframes bounce { 50% { transform: translate(-50%, -45%); } }
 .scrollDown::before {
   content: '╲╱';
   animation: bounce 1.4s ease infinite;
@@ -407,6 +412,10 @@ a { color: var(--green-600); }
   bottom: 1.4rem;
   opacity: 0.85;
   color: rgba(255, 255, 255, 0.85);
+}
+/* Hide the scroll cue entirely on mobile */
+@media (max-width: 768px) {
+  .scrollDown { display: none; }
 }
 
 /* =================================================================
@@ -671,4 +680,120 @@ footer .border-bottom { border-color: rgba(255, 255, 255, 0.15) !important; }
 @media (max-width: 400px) {
   .hero-title { font-size: 1.75rem; }
   .navBrand { width: 11rem; }
+}
+
+/* =================================================================
+   Modern touches
+   ================================================================= */
+
+/* Smooth in-page scrolling (e.g. the hero scroll cue → #about) */
+html { scroll-behavior: smooth; }
+
+/* Scroll progress bar — CSS scroll-driven animation where supported,
+   with a JS fallback in home.js for browsers that don't. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 2000;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--green-500), var(--gold-500));
+  pointer-events: none;
+  will-change: transform;
+}
+/* On mobile, anchor to the bottom so the retracting top URL bar (which hides a
+   top-fixed bar while scrolling down) can't interfere. */
+@media (max-width: 768px) {
+  .scroll-progress { top: auto; bottom: 0; }
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress-grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes scroll-progress-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Service cards — animated gradient accent bar + lively icon on hover */
+.service-card { position: relative; overflow: hidden; }
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green-500), var(--gold-500));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 54px rgba(31, 58, 43, 0.18);
+  border-color: transparent;
+}
+.service-icon {
+  transition: background-color 0.35s ease, color 0.35s ease,
+              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card:hover .service-icon {
+  background: var(--green-500);
+  color: #fff;
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* Soft, blurred brand-colored depth behind the Services band */
+.section-cream { position: relative; overflow: hidden; }
+.section-cream::before,
+.section-cream::after {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+.section-cream::before {
+  top: -160px;
+  right: -140px;
+  background: radial-gradient(closest-side, rgba(106, 169, 124, 0.22), transparent);
+}
+.section-cream::after {
+  bottom: -180px;
+  left: -160px;
+  background: radial-gradient(closest-side, rgba(194, 163, 92, 0.16), transparent);
+}
+.section-cream > .container { position: relative; z-index: 1; }
+
+/* Subtle shine sweep across the primary CTA on hover */
+.btn-primary-filled { position: relative; overflow: hidden; }
+.btn-primary-filled::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+.btn-primary-filled:hover::after { left: 130%; }
+
+/* Honor reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .service-card:hover .service-icon { transform: none; }
+  .btn-primary-filled::after { display: none; }
 }
