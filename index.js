@@ -54,6 +54,8 @@ const scriptSrcUrls = [
   "*.jotform.com",
   "*.jotfor.ms",
   "https://hcaptcha.com",
+  "https://elfsightcdn.com",
+  "https://static.elfsight.com", // Add this line
 ];
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com",
@@ -85,6 +87,7 @@ const connectSrcUrls = [
   "https://cdn.jsdelivr.net",
   "https://www.youtube.com",
   "https://youtube.com",
+  "https://core.service.elfsight.com", // Add this line
 ];
 
 app.use(

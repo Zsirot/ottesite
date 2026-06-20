@@ -1,17 +1,5 @@
-:root {
-    --lightgreen: linear-gradient(white, rgb(236, 250, 239));
-  }
+/* Services page — page-specific tweaks.
+   The shared design system lives in boilerplate.css. */
 
-.fs-6 {
-  font-size: 1.03rem!important;
-}
-
-.green-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    background-image: var(--lightgreen);
-    background-position: center bottom;
-    background-size: cover;
-}
+/* Deep-link anchors land below the sticky-free header with breathing room */
+.pillar { scroll-margin-top: 1.5rem; }

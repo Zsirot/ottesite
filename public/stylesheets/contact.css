@@ -1,7 +1,15 @@
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+/* Contact page — page-specific tweaks.
+   The shared design system lives in boilerplate.css. */
+
+/* Strip number-input spinners (kept from the original) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
+
+/* Let the embedded JotForm fill the card cleanly */
+.contact-card iframe,
+.contact-card form { width: 100% !important; max-width: 100% !important; }

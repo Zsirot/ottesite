@@ -1,101 +1,94 @@
 <% layout('layouts/boilerplateContact') %>
-    <title>Contact John Otte for an appointment</title>
     <link rel="stylesheet" href="/stylesheets/contact.css">
-    <div class="my-4 page-title-container">
-        <h1 class="text-center page-title aos-init" style="font-family: 'Poppins', sans-serif;" data-aos="zoom-in">
-            GET IN TOUCH
-        </h1>
-    </div>
+    <title>Contact | Dr. John A. Otte, PsyD</title>
 
-    <div class="row contact-container d-flex align-items-evenly justify-content-center mx-2" data-aos="fade-in">
+    <!-- ============================== PAGE HERO ============================== -->
+    <header class="page-hero">
+        <div class="container">
+            <p class="eyebrow">Let's talk</p>
+            <h1 class="page-title">Get in Touch</h1>
+            <div class="flourish"><i class="fas fa-star"></i></div>
+            <p class="page-hero-sub">Making that first contact takes courage. Call, text, or send a message, and I'll
+                get back to you as soon as I can.</p>
+        </div>
+    </header>
 
-        <div class="row d-flex justify-content-center mb-4">
-            <div class="col-md-8 d-flex flex-column justify-content-center">
-                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseDetails" role="button"
-                    aria-expanded="false" aria-controls="collapseExample" style="font-family: 'Poppins', sans-serif;">
-                    View rates and payment information
-                </a>
-                <div class="collapse" id="collapseDetails">
-                    <div class="card card-body">
-                        <div>
-                            <span class="fw-bold">Cost per session</span>
-                            <span>$175</span>
+    <!-- ============================== CONTACT ============================== -->
+    <section class="section">
+        <div class="container">
+            <div class="row g-5 justify-content-center">
+
+                <!-- Left: details -->
+                <div class="col-lg-5 contact-info" data-aos="fade-right">
+                    <p>This is where the rubber meets the road: making that first contact. You can call me, send me a
+                        text, or send me an email using the form on this page, and I'll get back to you as soon as I
+                        can. Whatever method feels right to you is fine with me. Please give yourself credit for doing
+                        this; it takes courage and strength to ask for help.</p>
+
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>
+                            <span class="label">Office</span>
+                            5290 E. Yale Circle, Suite #201<br>Denver, Colorado 80222
+                        </span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>
+                            <span class="label">Phone</span>
+                            720.635.6274
+                        </span>
+                    </div>
+
+                    <a class="btn btn-success mt-4" data-bs-toggle="collapse" href="#collapseDetails" role="button"
+                        aria-expanded="false" aria-controls="collapseDetails">
+                        View rates &amp; payment information
+                    </a>
+                    <div class="collapse" id="collapseDetails">
+                        <div class="card card-body rates-card">
+                            <div class="rate-row"><span class="fw-bold">Cost per session</span><span>$175</span></div>
+                            <div class="rate-row"><span class="fw-bold">Sliding scale</span><span>Yes</span></div>
+                            <div class="rate-row"><span class="fw-bold">Pay by</span><span>American Express, Cash,
+                                    Check, Discover, Health Savings Account, Mastercard, Visa</span></div>
+                            <p class="fst-italic mt-3 mb-0">Please note, I do not file insurance. I will provide you with
+                                a bill that you can file, and I'll also help you with filing the claim, filling out
+                                forms, and so on.</p>
                         </div>
-                        <div>
-                            <span class="fw-bold">Sliding Scale</span>
-                            <span>Yes</span>
-                        </div>
-                        <div>
-                            <span class="fw-bold">Pay By:</span>
-                            <span>American Express, Cash, Check, Discover, Health Savings Account, Mastercard,
-                                Visa</span>
-                        </div>
-                        <br>
-                        <p class="fst-italic">Please note, I do not file insurance. I will provide you with a bill that
-                            you can
-                            file. I will also help you with filing the claim, filling out forms, etc.</p>
-                        <p class="fs-6 fw-bold" style="font-size: 0.9rem!important;">Call me or send a message above
-                            with
-                            any
-                            questions</p>
+                    </div>
 
+                    <div class="contact-note mt-4">Please do not send personal health information through this form. We
+                        are not able to answer mental health related questions or provide specific mental health advice
+                        through the form.</div>
+                </div>
 
-
+                <!-- Right: form -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="contact-card">
+                        <script type="text/javascript"
+                            src="https://form.jotform.com/jsform/240037725359155"></script>
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="col-lg-5 d-flex flex-column justify-content-start">
-            <div class="my-5 px-5 text-center fs-6 lh-lg">
-                This is where the rubber meets the road: making that first contact. You
-                can call me, send me a text, or send me an email (using the form on this page), and I'll get back to
-                you
-                as soon
-                as I can. Whatever
-                method feels right to you is fine with me.
-                Please give yourself credit for doing this, it takes courage and strength to ask for help.
-            </div>
+    </section>
 
-            <div class="text-center my-3 fs-5">
-                <h3 class="my-3" style="font-family: 'Poppins', sans-serif;">Address:</h3>
-                <p>5290 E. Yale Circle, Suite #201</p>
-                <p>Denver, Colorado 80222</p>
-                <p>Phone: 720.635.6274</p>
-                <p>Or, send a message using the form:</p>
-                <div class="row fst-italic m-4" style="font-size: 0.8rem;">Please do not send personal
-                    health
-                    information through
-                    this form. We are
-                    not able to answer mental health related questions or provide specific mental health advice through
-                    the form.</div>
-            </div>
-
-
-        </div>
-        <div class="container col-lg-5 d-flex flex-column justify-content-evenly">
-            <script type="text/javascript" src="https://form.jotform.com/jsform/240037725359155"></script>
-        </div>
-
-
-        <script>
-            // Starter JavaScript for disabling form submissions if there are invalid fields
-            (function () {
-                'use strict';
-                window.addEventListener('load', function () {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    const forms = document.getElementsByClassName('validated-form');
-                    // Loop over them and prevent submission
-                    const validation = Array.from(forms, function (form) {
-                        form.addEventListener('submit', function (event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
-
-        </script>
-        <script src="/javascripts/contact.js"></script>
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                const forms = document.getElementsByClassName('validated-form');
+                Array.from(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <script src="/javascripts/contact.js"></script>

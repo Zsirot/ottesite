@@ -1,17 +1,9 @@
-const introContainer = document.querySelector('.intro-container');
-const greenContainer = document.querySelector('.green-container');
-const whiteContainer = document.querySelector('.white-container');
-const scrollDown = document.querySelector('#scroll-1');
-const scrollDown2 = document.querySelector('#scroll-2');
-const scrollDown3 = document.querySelector('#scroll-3');
-
-
-scrollDown.addEventListener('click', function () {
-    introContainer.scrollIntoView(true)
-})
-scrollDown2.addEventListener('click', function () {
-    greenContainer.scrollIntoView(true)
-})
-scrollDown3.addEventListener('click', function () {
-    whiteContainer.scrollIntoView(true)
-})
+// Smooth-scroll any element carrying a [data-scroll-to] attribute to its target.
+document.querySelectorAll('[data-scroll-to]').forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+        const target = document.querySelector(trigger.getAttribute('data-scroll-to'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});

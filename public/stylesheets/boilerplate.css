@@ -1,188 +1,490 @@
-@font-face {
-  font-family: opificio;
-  src: url(/fonts/opificio_rounded.ttf);
-}
+/* =================================================================
+   John A. Otte, PsyD — Inner-page design system
+   Shared by About, Services, and Contact (via their layouts).
+   Mirrors the home-page tokens so the whole site reads as one.
+   ================================================================= */
+
 :root {
-  --lightgreen: rgb(236 250 239);
-}
-* {
-box-sizing: border-box;
+  /* Brand greens */
+  --green-900: #1f3a2b;
+  --green-700: #2f5740;
+  --green-600: #3f7553;
+  --green-500: #4f8c5e;
+  --green-400: #6aa97c;
+  --green-200: #bcd8c4;
+  --green-50:  #eef5f0;
+
+  /* Warm gold accent */
+  --gold-500: #c2a35c;
+  --gold-600: #a9883f;
+
+  /* Neutrals */
+  --ink:       #21302a;
+  --ink-soft:  #56655c;
+  --cream:     #f8f6f0;
+  --paper:     #ffffff;
+  --line:      rgba(31, 58, 43, 0.12);
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-label: 'Special Elite', 'Courier New', monospace;
+
+  /* Shape & depth */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 4px 16px rgba(31, 58, 43, 0.08);
+  --shadow-md: 0 16px 44px rgba(31, 58, 43, 0.13);
+  --maxw: 1180px;
+
+  --lightgreen: var(--green-50);
 }
 
-.btn-success {
-  background-color: rgb(141, 191, 148);
-  border-color: transparent;
-}
-.btn-success:active, .btn-success:hover, .btn-success:focus{
-  background-color: rgb(126, 180, 134);
-  border-color: transparent;
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--ink);
+  background-color: var(--paper);
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow-x: hidden;
 }
 
-.page-title-container {
-  position: relative; 
-  width: 100%;
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  color: var(--green-900);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+p { color: var(--ink); }
+a { color: var(--green-600); }
+
+/* Shared eyebrow / label */
+.eyebrow {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  color: var(--gold-600);
+  margin: 0;
+}
+
+/* Decorative gold flourish */
+.flourish {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 12rem;
-  box-shadow: 0px 6px 5px rgb(88, 88, 88), 0px -1px 4px rgb(88, 88, 88);
+  gap: 0.7rem;
+  color: var(--gold-500);
+  margin: 0.7rem 0 0;
 }
-.page-title-container:after {
+.flourish::before,
+.flourish::after {
   content: "";
-  background-image: url(/images/agriculture.png);
-  background-size: 220%;
-  background-repeat: no-repeat;
-  background-position: 0% 0%;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  z-index: -1;
-  
+  height: 1px;
+  width: 54px;
+  background: linear-gradient(to var(--dir, right), transparent, var(--gold-500));
 }
-.page-title {
-  font-size: 3rem;
-  color: rgb(255, 255, 255)
+.flourish::after { --dir: left; }
+.flourish i { font-size: 0.85rem; }
+
+/* =================================================================
+   Buttons
+   ================================================================= */
+.btn-primary-filled,
+.btn-primary-ghost,
+.btn-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 0.72rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+              background-color 0.25s ease, color 0.25s ease;
+}
+.btn-primary-filled {
+  background: var(--green-500);
+  border: 1px solid var(--green-500);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(47, 87, 64, 0.35);
+}
+.btn-primary-filled:hover {
+  background: var(--green-600);
+  border-color: var(--green-600);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(47, 87, 64, 0.42);
+}
+.btn-primary-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
+.btn-primary-ghost:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--green-900);
+  transform: translateY(-2px);
+}
+.btn-green {
+  background: transparent;
+  border: 1px solid var(--green-500);
+  color: var(--green-700);
+}
+.btn-green:hover {
+  background: var(--green-500);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
-body { 
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-    line-height: 2em;
-    margin: 0;
-    padding: 0;
-    border: 0; 
-    z-index: 0;
+/* Bootstrap success button → brand green (used on the contact page) */
+.btn-success {
+  background-color: var(--green-500);
+  border-color: var(--green-500);
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  font-weight: 400;
 }
-.btn-close {
-  background-color: rgba(163, 163, 163, 0.719);
-}
-
-.image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    background: url('/images/pathWoods.jfif') no-repeat fixed;
-    background-position: center bottom;
-    background-size: cover;
+.btn-success:active, .btn-success:hover, .btn-success:focus {
+  background-color: var(--green-600) !important;
+  border-color: var(--green-600) !important;
+  box-shadow: none !important;
 }
 
-.navbar{
-    min-height: 12vh;
+/* =================================================================
+   Navbar — a persistent sticky evergreen bar on the inner pages.
+   ================================================================= */
+.navbar {
+  min-height: 11vh;
+  z-index: 1050;
+  background-color: var(--green-900);
+  box-shadow: 0 2px 18px rgba(15, 30, 22, 0.28);
 }
+/* Solid panel background on mobile (Bootstrap makes it transparent again on lg). */
+.offcanvas { background-color: var(--green-900); }
 .navBrand {
-    width: 15rem;
+  width: 13rem;
+  max-width: 60vw;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
 }
-.navbar-toggler {
-  border: none;
+
+/* Custom hamburger (only shown < lg, i.e. on touch / small screens).
+   Hover is irrelevant on touch, so the polish lives in the open
+   transition below; here we just give a tactile tap response. */
+.navbar-toggler { border: none; padding: 6px; transition: transform 0.2s ease; }
+.navbar-toggler:focus { box-shadow: none; }
+.navbar-toggler:active { transform: scale(0.9); }
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 24px;
 }
+.hamburger span {
+  display: block;
+  height: 2.5px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  transition: background-color 0.25s ease;
+}
+.navbar-toggler:active .hamburger span { background-color: var(--gold-500); }
+
+/* Slick open transition for the mobile menu: smoother panel slide, then
+   the nav items cascade in with a staggered fade/slide. */
+.offcanvas.offcanvas-end { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+@media (max-width: 991.98px) {
+  .offcanvas-body .nav-item { opacity: 0; transform: translateX(26px); }
+  .offcanvas.show .offcanvas-body .nav-item {
+    animation: navItemIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .offcanvas.show .offcanvas-body .nav-item:nth-child(1) { animation-delay: 0.10s; }
+  .offcanvas.show .offcanvas-body .nav-item:nth-child(2) { animation-delay: 0.17s; }
+  .offcanvas.show .offcanvas-body .nav-item:nth-child(3) { animation-delay: 0.24s; }
+  .offcanvas.show .offcanvas-body .nav-item:nth-child(4) { animation-delay: 0.31s; }
+  .offcanvas.show .offcanvas-body .nav-item:nth-child(5) { animation-delay: 0.38s; }
+}
+@keyframes navItemIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offcanvas-body .nav-item { opacity: 1 !important; transform: none !important; animation: none !important; }
+}
+
 .nav-item a {
-    margin: 7px 12px;
-    text-decoration: none;
-    z-index: 5;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 200;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: white;
-    transition: all 0.75s cubic-bezier(0.165, 0.84, 0.44, 1)
+  margin: 7px 14px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: #fff;
+  position: relative;
+  transition: color 0.3s ease;
 }
-.nav-item a:hover {
-    transform:scale3d(1.3, 1.3, 1.3) !important ;
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
-    color: greenyellow;
+.nav-item a::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -4px;
+  height: 1.5px;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
-.nav-item a:active   {
-    transform:scale3d(1.3, 1.3, 1.3) !important ;
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
-    color: greenyellow;
-}
-.nav-item a:focus-visible {
-    outline: 0;
-    transform:scale3d(1.3, 1.3, 1.3) !important ;
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
-    color: greenyellow;
-}
+.nav-item a:hover,
+.nav-item a:focus-visible { color: var(--gold-500); outline: 0; }
+.nav-item a:hover::after,
+.nav-item a:focus-visible::after { transform: scaleX(1); }
+
+.offcanvas-body.bg-dark { background-color: rgba(20, 35, 26, 0.97) !important; }
+.btn-close { background-color: rgba(255, 255, 255, 0.85); }
 
 @media (min-width: 992px) {
-    .offcanvas-body.bg-dark {
-        --bs-bg-opacity: 1;
-        background-color: transparent !important;
-      }
-    .navBrand {
-      width: 25vw;
-    }
-    .page-title-container:after
-    {
-      background-position: 0% 26%;
-      background-size: 110%;
-    }
-    .page-title {
-      font-size: 3.7rem;
-    } 
+  .offcanvas-body.bg-dark {
+    --bs-bg-opacity: 1;
+    background-color: transparent !important;
   }
-
-footer{
-    min-height: 10vh;
-    background-color: rgb(128, 184, 136) !important;
+  .navBrand { width: 16rem; }
 }
 
-.box-3 { background-color: rgb(128, 184, 136); }
-.box-3 {
-    height: 33.33%;
-    width: 100%; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .button {
-    line-height: 50px;
-    height: 50px;
-    text-align: center;
-    width: 250px;
-    cursor: pointer;
-  }
-  .button-three {
-    color: #FFF;
-    transition: all 0.5s;
-    position: relative;
-  }
-  .button-three::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(255,255,255,0.1);
-    transition: all 0.3s;
-  }
-  .button-three:hover::before {
-    opacity: 0 ;
-    transform: scale(0.5,0.5);
-  }
-  .button-three::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border: 1px solid rgba(255,255,255,0.5);
-    transform: scale(1.2,1.2);
-  }
-  .button-three:hover::after {
-    opacity: 1;
-    transform: scale(1,1);
-  }
-  
+/* =================================================================
+   Page hero (replaces .page-title-container) — continuous with the
+   navbar band thanks to the shared fixed background.
+   ================================================================= */
+.page-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(31, 58, 43, 0.90), rgba(31, 58, 43, 0.94)),
+    url('/images/pathWoods.jfif') center center / cover fixed;
+  color: #fff;
+  text-align: center;
+  padding: 3.5rem 1rem 4.5rem;
+}
+.page-hero .eyebrow { color: var(--gold-500); }
+.page-hero .flourish { color: var(--gold-500); margin-top: 1rem; }
+.page-title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-weight: 500;
+  font-size: 2.6rem;
+  letter-spacing: -0.01em;
+  margin: 0.5rem 0 0;
+}
+.page-hero-sub {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 60ch;
+  margin: 1.3rem auto 0;
+  font-size: 1.05rem;
+}
+@media (min-width: 992px) {
+  .page-hero { padding: 4.5rem 1rem 5.5rem; }
+  .page-title { font-size: 3.4rem; }
+}
 
+/* =================================================================
+   Section scaffolding
+   ================================================================= */
+.section { padding: 5.5rem 0; }
+.section-cream { background: var(--cream); }
+.section-head { max-width: 760px; margin: 0 auto 3rem; text-align: center; }
+.section-title { font-size: 2.2rem; margin: 0.2rem 0 0; }
+.section-lead { color: var(--ink-soft); font-size: 1.05rem; margin-top: 1rem; }
+@media (min-width: 992px) { .section-title { font-size: 2.6rem; } }
 
+.lead-paragraph {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--green-700);
+  font-size: 1.45rem;
+  line-height: 1.5;
+}
 
+/* =================================================================
+   About — alternating feature rows
+   ================================================================= */
+.feature-row { padding: 2.5rem 0; }
+.feature-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.feature-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  aspect-ratio: 4 / 3;
+  transition: transform 0.6s ease;
+}
+.feature-photo:hover img { transform: scale(1.04); }
+.feature-kicker {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  color: var(--gold-600);
+}
+.feature-heading {
+  font-size: 1.7rem;
+  margin: 0.4rem 0 1rem;
+}
+.feature-text p { margin-bottom: 0; }
 
+/* =================================================================
+   Services — intro badges + pillars
+   ================================================================= */
+.therapy-intro { text-align: center; }
+.therapy-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 1.6rem auto 0;
+  padding: 0;
+  list-style: none;
+  max-width: 640px;
+}
+.therapy-list li {
+  background: var(--paper);
+  border: 1px solid var(--green-200);
+  color: var(--green-700);
+  border-radius: 999px;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+}
+.section-cream .therapy-list li { background: var(--paper); }
+
+.pillar { padding: 5rem 0; }
+.pillar-head { text-align: center; margin-bottom: 2rem; }
+.pillar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--green-50);
+  color: var(--green-600);
+  font-size: 1.7rem;
+  margin-bottom: 1.1rem;
+}
+.section-cream .pillar-icon { background: #fff; }
+.pillar-title { font-size: 2rem; margin: 0; }
+.pillar-tag {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--gold-600);
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+.pillar-body { max-width: 720px; margin: 0 auto; }
+.pillar-body p { margin-bottom: 1.3rem; }
+.pillar-body ol, .pillar-body ul { margin-bottom: 1.3rem; }
+.pillar-body li { margin-bottom: 0.5rem; }
+
+/* =================================================================
+   Contact
+   ================================================================= */
+.contact-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1.6rem;
+}
+.contact-info h3 { font-size: 1.4rem; margin-bottom: 0.4rem; }
+.contact-info p { margin-bottom: 0.3rem; }
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.contact-detail:last-child { border-bottom: 0; }
+.contact-detail i { color: var(--green-500); font-size: 1.1rem; margin-top: 0.35rem; }
+.contact-detail span { display: block; }
+.contact-detail .label {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  color: var(--gold-600);
+}
+.contact-note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  background: var(--green-50);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.1rem;
+}
+.rates-card.card { border: 1px solid var(--line); border-radius: var(--radius-sm); margin-top: 0.8rem; }
+.rates-card .rate-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0;
+}
+.rates-card .rate-row .fw-bold { color: var(--green-700); }
+
+/* =================================================================
+   CTA band
+   ================================================================= */
+.cta-band {
+  background:
+    linear-gradient(rgba(31, 58, 43, 0.92), rgba(31, 58, 43, 0.92)),
+    url('/images/leaves.webp') center / cover fixed;
+  color: #fff;
+  text-align: center;
+  padding: 4.5rem 1rem;
+}
+.cta-band h2 { color: #fff; font-size: 2.1rem; }
+.cta-band p { color: rgba(255, 255, 255, 0.85); max-width: 55ch; margin: 1rem auto 1.8rem; }
+
+/* =================================================================
+   Links / footer
+   ================================================================= */
+.link {
+  color: var(--green-600);
+  font-weight: 400;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.link:hover { color: var(--green-700); border-bottom-color: var(--green-500); }
+
+footer {
+  min-height: 10vh;
+  background-color: var(--green-900) !important;
+}
+footer .nav-link { color: rgba(255, 255, 255, 0.85) !important; }
+footer .nav-link:hover { color: var(--gold-500) !important; }
+footer .border-bottom { border-color: rgba(255, 255, 255, 0.15) !important; }
+
+/* =================================================================
+   Responsive
+   ================================================================= */
+@media (max-width: 768px) {
+  .section, .pillar { padding: 3.5rem 0; }
+  .page-title { font-size: 2.1rem; }
+  .feature-row { padding: 1.5rem 0; }
+  .lead-paragraph { font-size: 1.25rem; }
+}
