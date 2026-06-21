@@ -185,6 +185,8 @@ a { color: var(--green-600); }
 .navbar { min-height: 11vh; position: relative; z-index: 1050; }
 /* Solid panel background on mobile (Bootstrap makes it transparent again on lg). */
 .offcanvas { background-color: var(--green-900); }
+/* "MENU" title is an h5, so override the dark heading color with the gold accent. */
+.offcanvas-title { color: var(--gold-500); }
 .navBrand {
   width: 13rem;
   max-width: 60vw;
@@ -482,6 +484,24 @@ a { color: var(--green-600); }
 }
 
 .about-copy { font-size: 1rem; }
+/* Scenic banner above a section heading */
+.section-banner {
+  max-width: 760px; /* match the narrower size it had inside the welcome column */
+  margin: 0 auto 3rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.section-banner img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 6;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 768px) {
+  .section-banner img { aspect-ratio: 16 / 9; }
+}
 .about-mobile-photo {
   max-width: 300px;
   margin: 0 auto 2.6rem;
@@ -641,6 +661,137 @@ a { color: var(--green-600); }
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow-md);
+}
+
+/* =================================================================
+   Latest writing (Substack preview) — green pattern band
+   ================================================================= */
+.writing-section {
+  background:
+    linear-gradient(rgba(31, 58, 43, 0.92), rgba(31, 58, 43, 0.92)),
+    url('/images/agriculture.png') center / cover fixed;
+  color: #fff;
+  padding: 6rem 0;
+}
+.writing-section .section-title { color: #fff; }
+.writing-section .flourish { color: var(--gold-500); }
+
+/* Left: nature photo — same 4:3 box as the preview so the two match */
+.writing-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 4 / 3;
+}
+.writing-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top; /* keep John's face when cropped to landscape */
+}
+
+/* Right: clickable article preview styled like a little window.
+   Flex column + the same 4:3 box makes it equal-sized with the photo. */
+.writing-preview {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+  text-decoration: none;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.writing-preview:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 34px 72px rgba(0, 0, 0, 0.55);
+}
+.writing-preview-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 15px;
+  background: #efece4;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.writing-preview-bar span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #cdc8bc;
+}
+.writing-preview-shot {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  /* soft placeholder so the box still looks intentional before the screenshot is added */
+  background: linear-gradient(135deg, var(--green-50), #ffffff);
+}
+.writing-preview-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center; /* keeps the post card in view from the wide screenshot */
+}
+.writing-preview-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top, rgba(15, 30, 22, 0.55), rgba(15, 30, 22, 0.12));
+  transition: background 0.35s ease;
+}
+.writing-preview:hover .writing-preview-overlay {
+  background: linear-gradient(to top, rgba(15, 30, 22, 0.72), rgba(15, 30, 22, 0.3));
+}
+.writing-preview-label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  max-width: 90%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--green-900);
+  padding: 0.75rem 1.4rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+.writing-preview:hover .writing-preview-label { transform: translateY(-3px); }
+.wpl-kicker {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  color: var(--gold-600);
+}
+.wpl-kicker i { margin-right: 0.15rem; }
+.wpl-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.06rem;
+  line-height: 1.25;
+  color: var(--green-900);
+}
+.wpl-single {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.02rem;
+  color: var(--green-900);
+}
+.wpl-single i { color: var(--green-600); }
+
+@media (max-width: 768px) {
+  .writing-section { padding: 4rem 0; }
 }
 
 /* =================================================================

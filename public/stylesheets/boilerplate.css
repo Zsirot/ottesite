@@ -178,6 +178,8 @@ a { color: var(--green-600); }
 }
 /* Solid panel background on mobile (Bootstrap makes it transparent again on lg). */
 .offcanvas { background-color: var(--green-900); }
+/* "MENU" title is an h5, so override the dark heading color with the gold accent. */
+.offcanvas-title { color: var(--gold-500); }
 .navBrand {
   width: 13rem;
   max-width: 60vw;

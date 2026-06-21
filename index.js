@@ -12,6 +12,7 @@ const videoData = require("./videoData");
 const AppError = require("./utils/AppError");
 const crypto = require("crypto");
 const events = require("./store/events");
+const substack = require("./store/substack");
 
 app.set("views", path.join(__dirname, "views"));
 
@@ -124,8 +125,19 @@ app.use(
   })
 );
 
+// Truncate to n chars at a word boundary, adding an ellipsis when clipped.
+function truncate(str, n) {
+  const s = String(str || "").trim();
+  if (s.length <= n) return s;
+  let cut = s.slice(0, n);
+  const lastSpace = cut.lastIndexOf(" ");
+  if (lastSpace > n * 0.6) cut = cut.slice(0, lastSpace);
+  return cut.trimEnd() + "…";
+}
+
 app.get("/", (req, res) => {
-  res.render("home");
+  const title = substack.getLatestTitle();
+  res.render("home", { latestPost: title ? truncate(title, 70) : null });
 });
 app.get("/contact", (req, res) => {
   res.render("contact", {

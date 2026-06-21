@@ -33,6 +33,11 @@
             <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
             <script>
                 AOS.init({ duration: 1000, once: true, offset: 80, easing: 'ease-out-quart' });
+                // Recalc after fonts + images load so above-the-fold items aren't stuck hidden until scroll.
+                window.addEventListener('load', function () { AOS.refresh(); });
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(function () { AOS.refresh(); });
+                }
             </script>
 
 
