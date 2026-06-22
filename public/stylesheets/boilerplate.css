@@ -184,6 +184,16 @@ a { color: var(--green-600); }
   width: 13rem;
   max-width: 60vw;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+  transform-origin: left center;
+  transition: transform 0.16s ease-out, filter 0.16s ease-out;
+}
+.navBrand:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 5px 13px rgba(0, 0, 0, 0.5));
+}
+.navBrand:active {
+  transform: scale(0.95);
+  transition-duration: 0.06s;
 }
 
 /* Custom hamburger (only shown < lg, i.e. on touch / small screens).
@@ -279,8 +289,8 @@ a { color: var(--green-600); }
 .page-hero {
   position: relative;
   background:
-    linear-gradient(rgba(31, 58, 43, 0.90), rgba(31, 58, 43, 0.94)),
-    url('/images/pathWoods.webp') center center / cover fixed;
+    linear-gradient(rgba(31, 58, 43, 0.82), rgba(31, 58, 43, 0.88)),
+    url('/images/forestlight.webp') center center / cover fixed;
   color: #fff;
   text-align: center;
   padding: 3.5rem 1rem 4.5rem;
