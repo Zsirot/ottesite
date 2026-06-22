@@ -280,7 +280,7 @@ a { color: var(--green-600); }
   position: relative;
   background:
     linear-gradient(rgba(31, 58, 43, 0.90), rgba(31, 58, 43, 0.94)),
-    url('/images/pathWoods.jfif') center center / cover fixed;
+    url('/images/pathWoods.webp') center center / cover fixed;
   color: #fff;
   text-align: center;
   padding: 3.5rem 1rem 4.5rem;

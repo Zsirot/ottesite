@@ -1,3 +1,7 @@
+// Load .env before anything that reads process.env (e.g. store/db.js). dotenv
+// never overrides vars already set by the platform, so this is a no-op on Heroku.
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const path = require("path");

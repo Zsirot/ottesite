@@ -160,7 +160,7 @@ a { color: var(--green-600); }
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  background: url('/images/background-new.jpg') no-repeat center center fixed;
+  background: url('/images/background-new.webp') no-repeat center center fixed;
   background-size: cover;
 }
 .image::before {
@@ -669,7 +669,7 @@ a { color: var(--green-600); }
 .writing-section {
   background:
     linear-gradient(rgba(31, 58, 43, 0.92), rgba(31, 58, 43, 0.92)),
-    url('/images/agriculture.png') center / cover fixed;
+    url('/images/agriculture.webp') center / cover fixed;
   color: #fff;
   padding: 6rem 0;
 }

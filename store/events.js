@@ -129,6 +129,7 @@ const file = {
 };
 
 const backend = pool ? pg : file;
+console.log(`[events] using ${pool ? "Postgres" : "flat-file"} backend`);
 
 module.exports = {
   init: backend.init,
