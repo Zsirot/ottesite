@@ -8,7 +8,6 @@ const nodemailer = require("nodemailer");
 const helmet = require("helmet");
 const session = require("express-session");
 const flash = require("connect-flash");
-const videoData = require("./videoData");
 const AppError = require("./utils/AppError");
 const crypto = require("crypto");
 const events = require("./store/events");
@@ -196,60 +195,6 @@ app.get("/about", (req, res) => {
 });
 app.get("/services", (req, res) => {
   res.render("services");
-});
-// app.get("/video", (req, res) => {
-//   res.render("video", { videoData });
-// });
-// app.get("/writings", (req, res) => {
-//   res.render("writings");
-// });
-app.get("/chapter1", (req, res) => {
-  res.render("chapter1");
-});
-app.get("/chapter2", (req, res) => {
-  res.render("chapter2");
-});
-app.get("/chapter3", (req, res) => {
-  res.render("chapter3");
-});
-// app.get("/chapter4", (req, res) => {
-//   res.render("chapter4");
-// });
-app.get("/chapter5", (req, res) => {
-  res.render("chapter5");
-});
-app.get("/blog1", (req, res) => {
-  res.render("blog1");
-});
-app.get("/blog2", (req, res) => {
-  res.render("blog2");
-});
-app.get("/blog3", (req, res) => {
-  res.render("blog3");
-});
-app.get("/blog4", (req, res) => {
-  res.render("blog4");
-});
-app.get("/blog5", (req, res) => {
-  res.render("blog5");
-});
-app.get("/blog6", (req, res) => {
-  res.render("blog6");
-});
-app.get("/blog7", (req, res) => {
-  res.render("blog7");
-});
-app.get("/blog8", (req, res) => {
-  res.render("blog8");
-});
-app.get("/blog9", (req, res) => {
-  res.render("blog9");
-});
-app.get("/holidayblog", (req, res) => {
-  res.render("holidayblog");
-});
-app.get("/holidayblog2", (req, res) => {
-  res.render("holidayblog2");
 });
 
 // ===========================================================================
