@@ -1,13 +1,15 @@
 <% layout('layouts/boilerplate') %>
-    <title>Error | John A. Otte</title>
-    <link rel="stylesheet" href="">
-    <div class="my-4 page-title-container">
-        <h1 class="text-center page-title aos-init" style="font-family: 'Poppins', sans-serif;" data-aos="zoom-in">
-            ERROR
-        </h1>
-    </div>
 
-    <h1 class="text-center">
-        (<%=err.statusCode%>)
-            <%=err.message%>
-    </h1>
+    <header class="page-hero">
+        <div class="container">
+            <p class="eyebrow">Something went wrong</p>
+            <h1 class="page-title">Error <%= statusCode %></h1>
+            <div class="flourish"><i class="fas fa-star"></i></div>
+            <p class="page-hero-sub"><%= err.message %></p>
+        </div>
+    </header>
+    <section class="section text-center">
+        <div class="container">
+            <a href="/" class="btn-green">Back to home</a>
+        </div>
+    </section>

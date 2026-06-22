@@ -134,14 +134,52 @@ function truncate(str, n) {
   return cut.trimEnd() + "…";
 }
 
+// Per-page <title>/description/canonical, consumed by views/partials/seo.ejs.
+const SEO = {
+  home: {
+    title: "Therapy with John A. Otte, PsyD | Denver, Colorado",
+    description:
+      "Psychotherapy for adults in Denver, Colorado. Dr. John A. Otte, PsyD integrates depth psychology, spirituality, and the therapeutic relationship to treat addiction, depression, and anxiety.",
+    path: "/",
+  },
+  about: {
+    title: "About Dr. John A. Otte, PsyD | Denver Clinical Psychologist",
+    description:
+      "Meet Dr. John A. Otte, PsyD, a Denver clinical psychologist with over 35 years of experience integrating psychoanalytic depth, family systems, Jungian thought, and spirituality.",
+    path: "/about",
+  },
+  services: {
+    title: "Services & Approach | Denver Therapy for Addiction & Depression",
+    description:
+      "Individual and group psychotherapy in Denver for addiction, depression, and anxiety, drawing on CBT, existential, family systems, Jungian, and psychodynamic approaches.",
+    path: "/services",
+  },
+  contact: {
+    title: "Contact Dr. John A. Otte, PsyD | Denver Therapy",
+    description:
+      "Reach Dr. John A. Otte, PsyD in Denver, Colorado. Call, text, or message to set up a free 15-20 minute consultation. Office at 5290 E. Yale Circle, Suite #201.",
+    path: "/contact",
+  },
+  calendar: {
+    title: "Events | John A. Otte, PsyD | Denver",
+    description:
+      "Upcoming groups, workshops, and events with Dr. John A. Otte, PsyD in Denver, Colorado.",
+    path: "/calendar",
+  },
+};
+
 app.get("/", (req, res) => {
   const title = substack.getLatestTitle();
-  res.render("home", { latestPost: title ? truncate(title, 70) : null });
+  res.render("home", {
+    latestPost: title ? truncate(title, 70) : null,
+    seo: SEO.home,
+  });
 });
 app.get("/contact", (req, res) => {
   res.render("contact", {
     error: req.flash("error"),
     success: req.flash("success"),
+    seo: SEO.contact,
   });
 });
 app.post("/contact", (req, res) => {
@@ -191,10 +229,10 @@ app.post("/contact", (req, res) => {
   // }
 });
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", { seo: SEO.about });
 });
 app.get("/services", (req, res) => {
-  res.render("services");
+  res.render("services", { seo: SEO.services });
 });
 
 // ===========================================================================
@@ -268,7 +306,7 @@ function formatEvent(ev) {
 }
 
 app.get("/calendar", (req, res) => {
-  res.render("calendar", { events: events.upcoming().map(formatEvent) });
+  res.render("calendar", { events: events.upcoming().map(formatEvent), seo: SEO.calendar });
 });
 
 app.get("/login", (req, res) => {
@@ -340,7 +378,11 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = "Oh No, Something Went Wrong!";
-  res.status(statusCode).render("error", { err, statusCode });
+  res.status(statusCode).render("error", {
+    err,
+    statusCode,
+    seo: { title: `Error ${statusCode} | John A. Otte, PsyD`, noindex: true, path: "/" },
+  });
   // res.redirect(`${req.originalUrl}`) //save this for flash error redirection
 });
 

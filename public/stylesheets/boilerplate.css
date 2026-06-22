@@ -497,6 +497,8 @@ footer .border-bottom { border-color: rgba(255, 255, 255, 0.15) !important; }
   .page-title { font-size: 2.1rem; }
   .feature-row { padding: 1.5rem 0; }
   .lead-paragraph { font-size: 1.25rem; }
+  /* fixed backgrounds are janky / unsupported on mobile — let them scroll */
+  .navbar, .page-hero, .cta-band { background-attachment: scroll; }
 }
 
 /* =================================================================

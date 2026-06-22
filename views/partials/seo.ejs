@@ -1,0 +1,25 @@
+<%
+  // Per-page SEO head tags. Routes pass `seo = { title, description, path, noindex }`.
+  var SITE_URL = 'https://johnaotte.com';
+  var s = (typeof seo !== 'undefined' && seo) ? seo : {};
+  var _title = s.title || 'John A. Otte, PsyD | Therapy & Spirituality in Denver, Colorado';
+  var _desc = s.description || 'Psychotherapy for adults in Denver, Colorado. Dr. John A. Otte, PsyD integrates depth psychology, spirituality, and the therapeutic relationship to treat addiction, depression, and anxiety.';
+  var _url = SITE_URL + (s.path || '/');
+  var _img = SITE_URL + '/images/background-new.jpg';
+%>
+    <title><%= _title %></title>
+    <meta name="description" content="<%= _desc %>">
+    <% if (s.noindex) { %><meta name="robots" content="noindex"><% } %>
+    <link rel="canonical" href="<%= _url %>">
+    <meta name="theme-color" content="#1f3a2b">
+    <link rel="icon" href="/favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="John A. Otte, PsyD">
+    <meta property="og:title" content="<%= _title %>">
+    <meta property="og:description" content="<%= _desc %>">
+    <meta property="og:url" content="<%= _url %>">
+    <meta property="og:image" content="<%= _img %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= _title %>">
+    <meta name="twitter:description" content="<%= _desc %>">
+    <meta name="twitter:image" content="<%= _img %>">

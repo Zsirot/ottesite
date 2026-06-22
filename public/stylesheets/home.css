@@ -859,6 +859,8 @@ html { scroll-behavior: smooth; }
    top-fixed bar while scrolling down) can't interfere. */
 @media (max-width: 768px) {
   .scroll-progress { top: auto; bottom: 0; }
+  /* fixed backgrounds are janky / unsupported on mobile — let them scroll */
+  .image, .approach-section, .writing-section { background-attachment: scroll; }
 }
 @supports (animation-timeline: scroll()) {
   .scroll-progress {
