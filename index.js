@@ -24,6 +24,7 @@ const sessionOptions = {
   name: "session",
   resave: false,
   saveUninitialized: true,
+  proxy: true, // trust X-Forwarded-Proto so the secure cookie is set behind Heroku/Cloudflare
   cookie: {
     httpOnly: true,
     sameSite: "lax",
@@ -37,6 +38,9 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config(); //require our .env file,
 }
 
+// Behind Heroku's router (and Cloudflare): trust the proxy so req.protocol/req.ip
+// are correct and the secure session cookie is actually set over HTTPS.
+app.set("trust proxy", 1);
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(helmet());
