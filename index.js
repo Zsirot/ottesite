@@ -12,6 +12,8 @@ const AppError = require("./utils/AppError");
 const crypto = require("crypto");
 const events = require("./store/events");
 const substack = require("./store/substack");
+const pool = require("./store/db");
+const pgSession = require("connect-pg-simple")(session);
 
 app.set("views", path.join(__dirname, "views"));
 
@@ -36,6 +38,11 @@ const sessionOptions = {
 if (process.env.NODE_ENV !== "production") {
   //if we ar enot in production mode
   require("dotenv").config(); //require our .env file,
+}
+
+// Persist sessions in Postgres when available, so logins survive dyno restarts.
+if (pool) {
+  sessionOptions.store = new pgSession({ pool, tableName: "session", createTableIfMissing: true });
 }
 
 // Behind Heroku's router (and Cloudflare): trust the proxy so req.protocol/req.ip
@@ -309,9 +316,13 @@ function formatEvent(ev) {
   };
 }
 
-app.get("/calendar", (req, res) => {
-  res.render("calendar", { events: events.upcoming().map(formatEvent), seo: SEO.calendar });
-});
+// Forward async route errors to the Express error handler.
+const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
+app.get("/calendar", wrap(async (req, res) => {
+  const list = (await events.upcoming()).map(formatEvent);
+  res.render("calendar", { events: list, seo: SEO.calendar });
+}));
 
 app.get("/login", (req, res) => {
   if (req.session.isAdmin) return res.redirect("/admin");
@@ -345,35 +356,35 @@ app.post("/logout", (req, res) => {
   req.session.destroy(() => res.redirect("/"));
 });
 
-app.get("/admin", requireAdmin, (req, res) => {
+app.get("/admin", requireAdmin, wrap(async (req, res) => {
   res.render("admin", {
-    events: events.all(),
+    events: await events.all(),
     max: events.MAX_EVENTS,
     success: req.flash("success"),
     error: req.flash("error"),
   });
-});
+}));
 
-app.post("/admin/events", requireAdmin, (req, res) => {
+app.post("/admin/events", requireAdmin, wrap(async (req, res) => {
   const { title, start } = req.body;
   if (!title || !title.trim() || !start) {
     req.flash("error", "A title and a date/time are both required.");
     return res.redirect("/admin");
   }
   // events.add() truncates over-long fields and returns false when at capacity.
-  if (!events.add(req.body)) {
+  if (!(await events.add(req.body))) {
     req.flash("error", `You can have at most ${events.MAX_EVENTS} events. Remove one before adding another.`);
     return res.redirect("/admin");
   }
   req.flash("success", "Event added.");
   res.redirect("/admin");
-});
+}));
 
-app.post("/admin/events/:id/delete", requireAdmin, (req, res) => {
-  events.remove(req.params.id);
+app.post("/admin/events/:id/delete", requireAdmin, wrap(async (req, res) => {
+  await events.remove(req.params.id);
   req.flash("success", "Event removed.");
   res.redirect("/admin");
-});
+}));
 
 app.all("*", (req, res, next) => {
   next(new AppError("Page Not Found", 404));
@@ -389,6 +400,9 @@ app.use((err, req, res, next) => {
   });
   // res.redirect(`${req.originalUrl}`) //save this for flash error redirection
 });
+
+// Ensure the events table exists (no-op for the flat-file backend).
+events.init().catch((e) => console.error("events.init failed:", e.message));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
